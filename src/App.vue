@@ -8,6 +8,7 @@
   </div>
 </template>
 <script>
+import Service from '@/util/service'
 import H from './util/history.js'
 import 'animate.css'
 console.log(H.history)
@@ -95,19 +96,32 @@ export default {
         pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
       }
       return pwd;
-    }
+    },
+    register: function (userid, username) {
+      const self = this;
+      let reqbody={
+        "userid":userid,
+        "username":username,
+      }
+      Service.Post('users/register',reqbody)
+      .then(resp => {
+          console.log(resp,resp.respBody)
+      })
+      .catch(error => console.log(error));
+  },
   },
   created: function () {
     window.addEventListener('scroll', this.handleScroll)
-    let msg = localStorage.getItem("wetalks_user");
+    let msg = localStorage.getItem("FTL_user");
     if(msg){
       console.log(msg)
     }else{
       let tmp_name = (Date.parse(new Date())/1000);
-      let userid = 'wetalksuser-' + tmp_name + '-' + (Math.round(Math.random()*9999));
-      let username = this.randomString(5)
-      localStorage.setItem("wetalks_user",username);
-      localStorage.setItem("wetalks_user_id",userid);
+      let userid = tmp_name + '_' + (Math.round(Math.random()*9999));
+      let username = 'FTLsuser_' + this.randomString(9)
+      localStorage.setItem("FTL_user",username);
+      localStorage.setItem("FTL_user_id",userid);
+      this.register(userid, username);
     }
   },
   components: {

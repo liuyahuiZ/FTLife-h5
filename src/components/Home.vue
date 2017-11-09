@@ -41,27 +41,10 @@ export default {
   },
   created: function(){
     let msg = localStorage.getItem("wetalks_user");
-    if(msg){
-      //console.log(msg)
-    }else{
-      let tmp_name = (Date.parse(new Date())/1000);
-      let userid = 'wetalksuser-' + tmp_name + '-' + (Math.round(Math.random()*9999));
-      let username = this.randomString(5)
-      localStorage.setItem("wetalks_user",username);
-      localStorage.setItem("wetalks_user_id",userid);
-    }
+    console.log(msg)
+    
   },
   methods: {
-    randomString (len) {
-      len = len || 32;
-      let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
-      let maxPos = $chars.length;
-      let pwd = '';
-      for (let i = 0; i < len; i++) {
-        pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
-      }
-      return pwd;
-    },
     EditImg() {
         this.$refs.hideenInput.click();
     },
@@ -162,8 +145,9 @@ export default {
     updateFile(file) {
       const self = this;
       const data = new FormData();
+      const userid = localStorage.getItem("FTL_user_id");
       data.append('file', file);
-      data.append('user', 'hubot');
+      data.append('userid', userid);
       // fetch('http://localhost:2019/files/fileUp', {
       //   method: 'POST',
       //   'Content-Type': 'multipart/form-data',

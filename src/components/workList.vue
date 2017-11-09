@@ -9,12 +9,12 @@
         <div class="box-flex width-80 margin-auto margin-top-2 flex-wrap unselect">
           <div class="box-flex images-half flex-direction-column"  >
             <div class="padding-all masonry" v-for="(L,index) in workListLeft">
-            <img class="images-con imgpic" v-bind:src="(config.api+L._id)">
+            <img class="images-con imgpic" v-bind:src="(config.api+L._id)" @click="goDetail(L._id)">
             </div>
           </div>
           <div class="box-flex images-half flex-direction-column" >
             <div class="padding-all masonry" v-for="(R,index) in workListRight">
-            <img class="images-con imgpic" v-bind:src="(config.api+R._id)">
+            <img class="images-con imgpic" v-bind:src="(config.api+R._id)" @click="goDetail(L._id)">
             </div>
           </div>
           <div class="box-flex width-100 line-height-50 flex-justify-center text-align-center" v-if="pageIndex<allPage">上拉加载更多</div>
@@ -255,6 +255,9 @@ export default {
         })
         .catch(error => console.log(error))
       })
+    },
+    goDetail(id) {
+      this.$router.push({path: '/pictureDetail/'+id })
     }
   }
 }
