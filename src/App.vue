@@ -144,18 +144,22 @@ a{text-decoration: blink;}
 
 @keyframes bounce-in {
   0% {
-    transform: translateY(800px);
+    /* transform: translateY(800px); */
+    transform: translateX(100vw);
   }
   100% {
-    transform: translateY(0px);
+    /* transform: translateY(0px); */
+    transform: translateX(0vw);
   }
 }
 @keyframes bounce-out {
   0% {
-    transform: translateY(0px);
+    /* transform: translateY(0px); */
+    transform: translateX(0vw);
   }
   100% {
-    transform: translateY(-800px);
+    /* transform: translateY(-800px); */
+    transform: translateX(-100vw);
   }
 }
 @keyframes pounce-in {

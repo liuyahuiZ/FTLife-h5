@@ -11,7 +11,8 @@ body{margin:0;padding:0;
   position: absolute;
   width: 100vw;
   height: 100vh;
-  overflow: auto;
+  overflow-y: hidden;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 }
 .main-screen{
@@ -102,4 +103,21 @@ body{margin:0;padding:0;
 }
 .textInput:focus{
   outline: 0; boxShadow: 0; border: 0;
+}
+.my-shs{
+  left: -3rem;
+  bottom: -4rem;
+}
+.my-logo{
+  right: 0;
+  bottom: 0;
+}
+.my-pic-top{
+  left: -0.5rem;
+  top: -0.5rem;
+}
+.my-pic-bottom{
+  right: -0.5rem;
+  bottom: -0.5rem;
+  transform: rotate(180deg);
 }

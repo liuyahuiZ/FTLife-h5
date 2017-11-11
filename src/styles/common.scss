@@ -3,7 +3,7 @@ $DirectionList:top,left,right,bottom;
 a{text-decoration: none;color:#333;}
 a:link, a:visited{text-decoration: none;border:0;}
 /*font-size*/
-$font-size-list:7,8,9,10,12,16,18,20,22,26,30,40,50;
+$font-size-list:6,7,8,9,10,12,16,18,20,22,26,30,40,50;
 @each $fonts in $font-size-list{
 	.font-size-#{$fonts}{font-size:#{$fonts*10%};}
 }
@@ -24,6 +24,7 @@ div{box-sizing:border-box;-webkit-tap-highlight-color:rgba(255,255,255,0)}
 .zindex-10{z-index: 10;}
 .zindex-9{z-index: 9;}
 .zindex-100{z-index: 100;}
+.zindex-200{z-index: 200;}
 .zindex-d10{z-index: -10;}
 /*border_radius*/
 $animal-list:3,6,9;
@@ -63,6 +64,8 @@ $animal-list:3,6,9;
 .tabsel{display: block;}
 .tabsel-active{background: #e8f5fa;color:#1cb1f6; }
 /*home*/
+.main-home{width: 100vw;height: 100vh;}
+.picture-screen{width: 70vw;height:60vh;left:15vw;top:13vh;position: relative;}
 .home{width: 100%;height: auto;}
 .height{height: 100%;}
 .slidebox-height{height: 160px}
@@ -91,6 +94,11 @@ $lineheight-list:10,12,14,18,20,22,25,30,35,40,42,50,65,62;
 @each $lineheight in $lineheight-list{
 	.line-height-#{$lineheight}{line-height:#{$lineheight}px;}
 }
+
+$lineheightr-list:1,2,2.5,3,4,5,6,7,8,9,10;
+@each $lineheightr in $lineheightr-list{
+	.line-heightr-#{$lineheightr}{line-height:#{$lineheightr}rem;}
+}
 .nomargin{margin: 0;}
 .margin-auto{margin: 0 auto;}
 /*min-width*/
@@ -104,7 +112,7 @@ $maxwidth-list:30,40,50,60,65,70;
 	.maxwidth-#{$maxwidth}{max-width:#{$maxwidth*1%};}
 }
 /*width*/
-$width-list:30,40,50,60,65,70,80,90,100;
+$width-list:10,20,30,40,50,60,65,70,75,80,90,100;
 @each $width in $width-list{
 	.width-#{$width}{width:#{$width*1%};}
 }
@@ -117,16 +125,24 @@ $heightp-list:10,20,25,30,35,40,50,65,100;
 @each $heightp in $heightp-list{
 	.heightp-#{$heightp}{height:#{$heightp*1%};}
 }
+/*height*/
+$heightr-list:1,2,3,4,5,6,7,8,9;
+@each $heightr in $heightr-list{
+	.heightr-#{$heightr}{height:#{$heightr}rem;}
+}
 /*margin*/
 .padding-all{padding: 3%;}
+.padding-all-2rem{padding: 2rem;}
 .padding-all-5x{padding: 5px;}
 .padding-all-10x{padding: 10px;}
 .padding-all-15x{padding: 15px;}
+.padding-1m-2m{padding: 1rem 2rem;}
+.padding-1m{padding: 1rem;}
 $breakpoint-map: (
-    left-1: (p: left,v:1%),left-3: (p: left, v:3%), left-5: (p: left,v:5%),left-d-5: (p: left,v:5px),left-10: (p: left,v:10%),left-20x: (p: left,v:20px),left-30x: (p: left,v:30px),
-    top-1: (p: top,v:1%),top-2: (p: top, v:3%), top-5: (p: top,v:5%),top-5x: (p: top,v:5px),top-10: (p: top,v:10%),top-d-10:(p: top,v:-10px),top-60x:(p: top,v:60px),top-120x:(p: top,v:120px),top-300x:(p: top,v:300px),
+    left-1: (p: left,v:1%),left-1r: (p: left,v:1rem),left-2r: (p: left, v:2rem),left-3: (p: left, v:3%), left-5: (p: left,v:5%),left-d-5: (p: left,v:5px),left-10: (p: left,v:10%),left-15: (p: left,v:15%),left-20x: (p: left,v:20px),left-30x: (p: left,v:30px),left-25: (p: left,v:25%),left-30: (p: left,v:30%),
+    top-0: (p: top,v:0), top-f5r: (p: top,v:0.5rem), top-1: (p: top,v:1%),top-2: (p: top, v:3%),top-3r: (p: top, v:3rem),top-5r: (p: top, v:5rem), top-5: (p: top,v:5%),top-5-d: (p: top,v:-5%),top-5x: (p: top,v:5px),top-10: (p: top,v:10%),top-d-10:(p: top,v:-10px),top-60x:(p: top,v:60px),top-11r: (p: top,v:11rem),top-12r: (p: top,v:12rem),top-120x:(p: top,v:120px),top-300x:(p: top,v:300px),
     right-1: (p: right,v:1%),right-3: (p: right, v:3%), right-5: (p: right,v:5%),right-d-5: (p: right,v:5px),right-10: (p: right,v:10%),right-20x: (p: right,v:20px),right-30x: (p: right,v:30px),
-    bottom-1: (p: bottom,v:1%),bottom-3: (p: bottom, v:3%), bottom-5: (p: bottom,v:5%),bottom-5x: (p: bottom,v:5px),bottom-10: (p: bottom,v:10%),bottom-60x: (p: bottom,v:60px),bottom-80x: (p: bottom,v:80px),bottom-110x: (p: bottom,v:110px)
+    bottom-0: (p: bottom,v:0%),bottom-1: (p: bottom,v:1%),bottom-1r: (p: bottom,v:1rem),bottom-3: (p: bottom, v:3%), bottom-5: (p: bottom,v:5%),bottom-5x: (p: bottom,v:5px),bottom-6r: (p: bottom,v:6rem),bottom-8r: (p: bottom,v:8rem),bottom-10: (p: bottom,v:10%),bottom-60x: (p: bottom,v:60px),bottom-80x: (p: bottom,v:80px),bottom-110x: (p: bottom,v:110px),bottom-50: (p: bottom,v:50%)
 );
 @each $label , $map in $breakpoint-map {
         .margin-#{$label}{
@@ -165,12 +181,13 @@ $position-map: (
 }
 
 /*text-color*/
-@each $textname,$color in (textclolor-red,#fd5023),(textclolor-black,#000),(textclolor-black-low,#999),(textclolor-333,#333),(textclolor-white,#fff),(textclolor-gray,#ccc),(textclolor-gray-red,#fc9378),(textclolor-blue-white,#66ccf5),(textclolor-blue,#9db9c5),(textclolor-green,#38c49f),(textclolor-666,#666),(textclolor-333,#333),(textclolor-alink,#2391e5),(textcolor-bg,#50afd6),(textcolor-yellow,#ffe082),(textcolor-quan-red,#f1483a),(textcolor-quan-gold,#ffa439),(textcolor-quan-brown,#dbb181),(textcolor-quan-detail,#8b501a),(textcolor-407b99,#407b99),(textcolor-be8116,#be8116),(textcolor-51b0d6,#51b0d6),(textcolor-ea3a3a,#ea3a3a),(textcolor-ff9b27,#ff9b27),(textcolor-2d2d2d,#2d2d2d),(textcolor-aeaeae,#aeaeae){
+@each $textname,$color in (textclolor-red,#fd5023),(textclolor-black,#000),(textclolor-black-low,#999),(textclolor-333,#333),(textclolor-white,#fff),(textclolor-gray,#ccc),(textclolor-gray-red,#fc9378),(textclolor-blue-white,#66ccf5),(textclolor-blue,#9db9c5),(textclolor-green,#38c49f),(textclolor-666,#666),(textclolor-333,#333),(textclolor-alink,#2391e5),(textcolor-bg,#50afd6),(textcolor-yellow,#ffe082),(textcolor-quan-red,#f1483a),(textcolor-quan-gold,#ffa439),
+(textcolor-quan-brown,#dbb181),(textcolor-quan-detail,#8b501a),(textcolor-407b99,#407b99),(textcolor-be8116,#be8116),(textcolor-51b0d6,#51b0d6),(textcolor-ea3a3a,#ea3a3a),(textcolor-ff9b27,#ff9b27),(textcolor-2d2d2d,#2d2d2d),(textcolor-aeaeae,#aeaeae),(textcolor-EF4224,#EF4224),(textcolor-EF3F24,#EF3F24) {
   .#{$textname}{color: $color;}
 }
 /*backgound-color*/
 @each $bgname,$color in (bg-home,#e8f5fa),(bg-bar,#51b0d6),(bg-show,#fff),(bg-del,#ff5757),(bg-top-bf,#fff0f0),(bg-bar-deep, #51afd6),(bg-top-rig,#38c49f),(bg-green,#33cd75),(bg-list-index,#fff7f8),(bg-gray,#d9d9d9),(bg-button-red,#f95b0f),(bg-yellow,#f7d173),(bg-f8b55e,#f8b55e),(bg-f6b45a,#f6b45a),(bg-7ecef4,#7ecef4),(bg-e9f5fa,#e9f5fa),(bg-e3f9ff,#e3f9ff),(bg-eee,#eee),(bg-button-green,#34cf75),(bg-button-gray, #999),(bg-activity,#ee4a41),(bg-activity-status,#ea3f21),
-(bg-efeff4,#f5f5f5),(bg-51b0d6,#51b0d6),(bg-ea3a3a,#ea3a3a),(bg-ccc,#ccc),(bg-333,#333),(bg-69cb89,#69cb89){
+(bg-efeff4,#f5f5f5),(bg-51b0d6,#51b0d6),(bg-ea3a3a,#ea3a3a),(bg-ccc,#ccc),(bg-333,#333),(bg-69cb89,#69cb89),(bg-ea3f21-r,rgba(239,63,36,0.84)),(bg-ea3f21-r9,rgba(239,63,36,0.9)),(bg-000-r,rgba(0,0,0,0.4)),(bg-00A1E4-r,rgba(0,161,228,0.9)),(bg-2A2B2C-r,rgba(42,43,44,0.9)){
  .#{$bgname}{background-color: $color;}
 }
 /*border-color*/
@@ -237,6 +254,17 @@ $align-self: auto,flex-start,flex-end,center,baseline,stretch;
   opacity: 0;
 }
 
+// opbg
+.black-bg{
+	display: block;
+    box-sizing: border-box;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
 /*music*/
 .modulepop{
 	width: 100%;height: 100%;left: 0px;
