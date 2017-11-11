@@ -1,21 +1,46 @@
 <template>
-<div class="home absolute bg-333">
+<div class="main-home relative bg-show">
     <div align="center" class="main-screen" v-show="!showImgBox" ref="mainScreen">
         <img class="photo-img" ref="selectImg" v-bind:src="(selectImgSrc)" @click='EditImg' alt="" />
-        <img src="../Img/bg.png" class="hover-img">
-        <input class="textInput" id="textInput" />
+        <img src="../Img/pic_hover.png" class="hover-img">
+        <div class="absolute bottom-12r width-100 zindex-100 text-align-left textclolor-white padding-1m">
+          <div class="font-size-12">我的{{textTitle}}</div>
+          <div>{{textInfo}}</div>
+        </div>
     </div>
-    <!-- <div onClick="draw()" style="display:block;width: 100px;height:30px;background:'#999'; margin: 0 auto;" >
-      一键合成
-    </div> -->
-    <div id="imgBox" class="imgBox" v-show="showImgBox">
+    <div id="imgBox" class="imgBox zindex-100" v-show="showImgBox">
       <img v-bind:src="(imgBox)"/>
-      <div class="getMore" @click="getMore" v-show="showImgBox">查看更多</div>
     </div>
     <div class="options">
       <div class="addFile" @click='EditImg'>+</div>
       <input id="hideenInput" class="hideenInput" type="file" accept="image/*" @change="inputChange"  ref="hideenInput" />
     </div>
+    <div class="absolute bottom-0 width-100 zindex-100 text-align-center padding-1m bg-000-r">
+        <img src="../Img/action.png" class="width-20 relative" @click="EditImg"/>
+    </div>
+    <div class="absolute top-1 right-3 width-30 zindex-200" v-show="showShare">
+        <img src="../Img/shareto.png" class="width-100 relative"/>
+    </div>
+    <div class="absolute main-home top-0 zindex-200" v-show="shareStatus">
+      <div class="width-100 relative">
+        <img src="../Img/takeText_top.png" class="width-60">
+        <img src="../Img/takeText_logo.png" class="width-30">
+      </div>
+      <div class="width-70 margin-left-15 margin-top-3r relative">
+        <img src="../Img/share_text.png" class="width-100">
+      </div>
+      <div class="width-70 margin-left-15 relative margin-top-2 padding-1m bg-ea3f21-r9 textclolor-white padding-bottom-3r">
+        <div class="width-70 margin-top-3r font-size-16"> 分享成功</div>
+        <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-100 margin-top-3r font-size-8" @click="getMore">
+          查看更多「盛世」和「守护」时刻
+        </div>
+        <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-100 margin-top-2 font-size-8" @click="goNext">
+          了解真正「盛世」和「守护」
+        </div>
+      </div>
+    </div>
+    <div class="black-bg zindex-110" v-show="shareStatus" />
+    <img src="../Img/takePicture_bg.jpg" class="absolute width-100 top-0 zindex-9"/>
 </div>
 </template>
 <script>
@@ -31,7 +56,11 @@ export default {
       selectImgSrc: '',
       imgBox: '',
       showImgBox: false,
-      Orientation: null
+      Orientation: null,
+      textTitle: sessionStorage.type,
+      textInfo: sessionStorage.text,
+      showShare: false,
+      shareStatus: false
     }
   },
   watch: {
@@ -78,13 +107,11 @@ export default {
       return new Blob([ab], { type: 'image/png' });
     },
     draw(fn) {
-      var text = $('#textInput').val();
-      console.log(text);
       this.showImgBox = true;
       let self = this;
       var data1= new Array();
-      var _width = 337;
-      var _height = 533;
+      var _width = 375;
+      var _height = 667;
       let images = this.$refs.mainScreen.querySelectorAll('img');
       for(var i=0;i<images.length;i++){
           data1[i]=images[i].src;
@@ -126,11 +153,19 @@ export default {
               }
           }else{
             //保存生成作品图片
-            ctx.font="30px Verdana";
+            let info = '我的'+sessionStorage.getItem('type')
+            ctx.font="19px Verdana";
             // 用渐变填色
-            ctx.fillStyle='#333';
+            ctx.fillStyle='#fff';
 
-            ctx.fillText(text,100,200);
+            ctx.fillText(info,20,430);
+
+            let text = sessionStorage.getItem('text')
+            ctx.font="15px Verdana";
+            // 用渐变填色
+            ctx.fillStyle='#fff';
+
+            ctx.fillText(text,20,460);
             self.convertCanvasToImage(c);
             // Canvas2Image.saveAsJPEG(c); //保存到电脑
           }
@@ -155,13 +190,26 @@ export default {
       // }).then((result)=>{
       //   console.log(result);
       // });
+      self.showShare = true;
+      setTimeout(()=>{
+        self.shareStatus = true;
+        self.showShare = false;
+      },3000)
       Service.FileUP(data).then(resp => {
         console.log(resp);
+        self.showShare = true;
+        setTimeout(()=>{
+          self.shareStatus = true;
+          self.showShare = false;
+        },3000)
       })
       .catch(error => console.log(error))
     },
-    getMore(){
+    getMore: function(){
       this.$router.push({path: '/workList'})
+    },
+    goNext: function(){
+      this.$router.push({path: '/last'})
     }
   }
 }

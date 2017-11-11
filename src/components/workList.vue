@@ -3,42 +3,48 @@
     <div id="page" class="page-header-main" @mousedown="startDrag" @touchstart="startDrag"
     @mousemove="onDrag" @touchmove="onDrag"
     @mouseup="stopDrag" @touchend="stopDrag" @mouseleave="stopDrag">
-      <div class="content" :style="contentPosition">
+      <div class="width-100 relative">
+        <img src="../Img/takeText_top.png" class="width-60">
+      </div>
+      <div class="width-70 margin-left-15 relative bg-show zindex-10">
+        <img src="../Img/list_top.png" class="width-100">
+      </div>
+      <div class="heightv-65 width-90 margin-left-5" :style="contentPosition">
         <div class="loadmore-top" v-if="!refresh" v-bind:class="{ transroute: rotate, transnone: !rotate }">↓</div>
         <div class="loadmore-top" v-if="refresh"><div class="spanner span-inner" ></div></div>
-        <div class="box-flex width-80 margin-auto margin-top-2 flex-wrap unselect">
-          <div class="box-flex images-half flex-direction-column"  >
-            <div class="padding-all masonry" v-for="(L,index) in workListLeft">
-            <img class="images-con imgpic" v-bind:src="(config.api+L._id)" @click="goDetail(L._id)">
-            </div>
-          </div>
-          <div class="box-flex images-half flex-direction-column" >
-            <div class="padding-all masonry" v-for="(R,index) in workListRight">
-            <img class="images-con imgpic" v-bind:src="(config.api+R._id)" @click="goDetail(L._id)">
-            </div>
-          </div>
-          <div class="box-flex width-100 line-height-50 flex-justify-center text-align-center" v-if="pageIndex<allPage">上拉加载更多</div>
-        </div>
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="(L,index) in workListLeft">
+             <img class="images-con imgpic" v-bind:src="(config.api+L._id)" @click="goDetail(L._id)">
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
         <div class="loadmore-bottom" v-if="!showloading" v-bind:class="{ transroute: !rotate, transnone: rotate }">↓</div>
         <div class="loadmore-bottom" v-if="showloading"><div class="spanner span-inner"></div></div>
-        
       </div>
-      <!--<svg class="bg" width="420" height="260">
-      <path :d="headerPath" fill="#3F51B5"></path>
-      </svg>
-        -->
+      <div class="width-100 relative">
+        <div class="text-align-center bg-53575A textclolor-white line-heightr-3 width-70 margin-left-15 margin-top-2 font-size-8" @click="getMore">
+          上传我的盛世和守护
+        </div>
+        <div class="text-align-center bg-53575A textclolor-white line-heightr-3 width-70 margin-left-15 margin-top-2 font-size-8" @click="goNext">
+          了解真正盛世及守护
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+require('swiper/dist/css/swiper.css')
 import Service from '@/util/service'
 import configs from '@/util/configs'
 import dynamics from 'dynamics.js'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Vue from 'vue'
 // let page = document.getElementById('page')
 // console.log(page)
 
+Vue.use(VueAwesomeSwiper)
 export default {
   data () {
     return {
@@ -60,10 +66,30 @@ export default {
       pageIndex: 1,
       pageNum: 6,
       allPage: 0,
+      notNextTick: true,
+      swiperOption: {
+        pagination: '.swiper-pagination',
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        coverflow: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows : true
+        }
+      }
     }
   },
   components: {
   },
+  computed: {
+      swiper() {
+        return this.$refs.mySwiper.swiper
+      }
+    },
   created: function () {
     // console.log('beforeCreate is triggered.')
     const self = this
@@ -77,13 +103,7 @@ export default {
         let data = resp.respBody;
         self.pageIndex = data.page.pageIndex
         self.allPage = data.page.allpage
-        for(var i=0;i<data.data.length;i++){
-          if(i%2==0){
-            self.workListLeft.push(data.data[i])
-          }else{
-            self.workListRight.push(data.data[i])
-          }
-        }
+        self.workListLeft.push(...data.data);
     })
     .catch(error => console.log(error))
   },
@@ -217,13 +237,7 @@ export default {
             let data = resp.respBody;
             self.pageIndex = data.page.pageIndex
             self.allPage = data.page.allpage
-            for(var i=0;i<data.data.length;i++){
-              if(i%2==0){
-                self.workListLeft.push(data.data[i])
-              }else{
-                self.workListRight.push(data.data[i])
-              }
-            }
+            self.workListLeft.push(...data.data);
             resolve(data.data)
         })
         .catch(error => console.log(error))
@@ -244,17 +258,17 @@ export default {
             console.log(data,data.data)
             self.pageIndex = data.page.pageIndex
             self.allPage = data.page.allpage
-            for(var i=0;i<data.data.length;i++){
-            if(i%2==0){
-                self.workListLeft.push(data.data[i])
-              }else{
-                self.workListRight.push(data.data[i])
-              }
-            }
+            self.workListLeft.push(...data.data);
             resolve(data.data)
         })
         .catch(error => console.log(error))
       })
+    },
+    getMore: function(){
+      this.$router.push({path: '/workList'})
+    },
+    goNext: function(){
+      this.$router.push({path: '/last'})
     },
     goDetail(id) {
       this.$router.push({path: '/pictureDetail/'+id })
@@ -318,4 +332,17 @@ export default {
     opacity: 0.7;
 }
 .masonry img:hover { opacity: 0.9; box-shadow: 1px 1px 20px #333;cursor: pointer }
+
+.swiper-inner {
+    width: 100%;
+    height: 400px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+  }
 </style>

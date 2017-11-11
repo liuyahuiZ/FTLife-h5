@@ -1,9 +1,7 @@
 <template>
   <div class="page-content">
   <transition  :name="transitionName" :mode="transModule" >
-    <keep-alive exclude="Com">
     <router-view class="view"></router-view>
-    </keep-alive>
   </transition>
   </div>
 </template>

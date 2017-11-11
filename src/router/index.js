@@ -15,6 +15,7 @@ import takeText from '@/components/takeText.vue'
 import takePicture from '@/components/takePicture.vue'
 import workList from '@/components/workList.vue'
 import pictureDetail from '@/components/pictureDetail.vue'
+import last from '@/components/last.vue'
 
 Vue.use(Router)
 
@@ -94,6 +95,11 @@ export default new Router({
       path: '/pictureDetail/:id',
       name: 'pictureDetail',
       component: pictureDetail
+    },
+    {
+      path: '/last',
+      name: 'last',
+      component: last
     },
   ]
 })

@@ -6,11 +6,11 @@
         <img src="../Img/takeText_logo.png" class="width-30">
       </div>
       <div class="width-70 box-flex text-align-center font-size-12 line-heightr-3 relative margin-left-15 margin-top-3r margin-bottom-1">
-        <div class="width-50 bg-ea3f21-r9 textclolor-white margin-right-1">盛世</div>
-        <div class="width-50 bg-show textcolor-EF3F24">守护</div>
+        <div class="width-50 bg-show textcolor-EF3F24 margin-right-1" :class="{ 'bg-ea3f21-r9 textclolor-white': isActive=== 'shs' }" @click="setActive('shs')">盛世</div>
+        <div class="width-50 bg-show textcolor-EF3F24" :class="{ 'bg-ea3f21-r9 textclolor-white': isActive=== 'sh' }" @click="setActive('sh')">守护</div>
       </div>
       <div class="bg-ea3f21-r9 relative width-70 margin-left-15 textclolor-white font-size-8 padding-1m ">
-          <textarea class="width-100 heightr-9" />
+          <textarea class="width-100 heightr-9 font-size-12" v-model="text" />
           <div class="margin-top-2">1.选择盛世或者守护</div>
           <div>2.选择或者输入你想要合成的文字</div>
           <div>3.点击拍照按钮选择你想要合成的照片</div>
@@ -35,17 +35,29 @@ import Vue from 'vue'
 export default {
   data () {
     return {
-      btnAnimate: false
+      btnAnimate: false,
+      isActive: 'shs',
+      text: '请输入'
     }
   },
   components: {
   },
   created: function () {
-    // console.log('beforeCreate is triggered.')
+    sessionStorage.setItem('type','盛世')
   },
   methods: {
+      setActive: function(wod) {
+        this.isActive= wod;
+        if(wod==='shs'){
+          sessionStorage.setItem('type','盛世')
+        } else{
+          sessionStorage.setItem('type','守护')
+        }
+      },
       goNext: function() {
-        this.$router.push({path: '/page6' })
+        console.log(this.text)
+        sessionStorage.setItem('text',this.text)
+        this.$router.push({path: '/takePicture' })
       },
       goTakeText: function() {
         this.$router.push({path: '/takeText' })
