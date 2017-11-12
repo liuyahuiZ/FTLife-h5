@@ -22,7 +22,7 @@
         <div class="loadmore-bottom" v-if="showloading"><div class="spanner span-inner"></div></div>
       </div>
       <div class="width-100 relative">
-        <div class="text-align-center bg-53575A textclolor-white line-heightr-3 width-70 margin-left-15 margin-top-2 font-size-8" @click="getMore">
+        <div class="text-align-center bg-53575A textclolor-white line-heightr-3 width-70 margin-left-15 margin-top-2 font-size-8" @click="getMyPicture">
           上传我的盛世和守护
         </div>
         <div class="text-align-center bg-53575A textclolor-white line-heightr-3 width-70 margin-left-15 margin-top-2 font-size-8" @click="goNext">
@@ -264,8 +264,8 @@ export default {
         .catch(error => console.log(error))
       })
     },
-    getMore: function(){
-      this.$router.push({path: '/workList'})
+    getMyPicture: function(){
+      this.$router.push({path: '/takePicture'})
     },
     goNext: function(){
       this.$router.push({path: '/last'})

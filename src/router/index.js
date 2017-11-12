@@ -92,7 +92,7 @@ export default new Router({
       component: workList
     },
     {
-      path: '/pictureDetail/:id',
+      path: '/pictureDetail/:id/:from?',
       name: 'pictureDetail',
       component: pictureDetail
     },

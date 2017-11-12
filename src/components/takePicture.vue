@@ -3,7 +3,7 @@
     <div align="center" class="main-screen" v-show="!showImgBox" ref="mainScreen">
         <img class="photo-img" ref="selectImg" v-bind:src="(selectImgSrc)" @click='EditImg' alt="" />
         <img src="../Img/pic_hover.png" class="hover-img">
-        <div class="absolute bottom-12r width-100 zindex-100 text-align-left textclolor-white padding-1m">
+        <div class="absolute bottom-28 width-100 zindex-100 text-align-left textclolor-white padding-1m">
           <div class="font-size-12">我的{{textTitle}}</div>
           <div>{{textInfo}}</div>
         </div>
@@ -12,34 +12,11 @@
       <img v-bind:src="(imgBox)"/>
     </div>
     <div class="options">
-      <div class="addFile" @click='EditImg'>+</div>
       <input id="hideenInput" class="hideenInput" type="file" accept="image/*" @change="inputChange"  ref="hideenInput" />
     </div>
     <div class="absolute bottom-0 width-100 zindex-100 text-align-center padding-1m bg-000-r">
         <img src="../Img/action.png" class="width-20 relative" @click="EditImg"/>
     </div>
-    <div class="absolute top-1 right-3 width-30 zindex-200" v-show="showShare">
-        <img src="../Img/shareto.png" class="width-100 relative"/>
-    </div>
-    <div class="absolute main-home top-0 zindex-200" v-show="shareStatus">
-      <div class="width-100 relative">
-        <img src="../Img/takeText_top.png" class="width-60">
-        <img src="../Img/takeText_logo.png" class="width-30">
-      </div>
-      <div class="width-70 margin-left-15 margin-top-3r relative">
-        <img src="../Img/share_text.png" class="width-100">
-      </div>
-      <div class="width-70 margin-left-15 relative margin-top-2 padding-1m bg-ea3f21-r9 textclolor-white padding-bottom-3r">
-        <div class="width-70 margin-top-3r font-size-16"> 分享成功</div>
-        <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-100 margin-top-3r font-size-8" @click="getMore">
-          查看更多「盛世」和「守护」时刻
-        </div>
-        <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-100 margin-top-2 font-size-8" @click="goNext">
-          了解真正「盛世」和「守护」
-        </div>
-      </div>
-    </div>
-    <div class="black-bg zindex-110" v-show="shareStatus" />
     <img src="../Img/takePicture_bg.jpg" class="absolute width-100 top-0 zindex-9"/>
 </div>
 </template>
@@ -59,8 +36,6 @@ export default {
       Orientation: null,
       textTitle: sessionStorage.type,
       textInfo: sessionStorage.text,
-      showShare: false,
-      shareStatus: false
     }
   },
   watch: {
@@ -190,18 +165,12 @@ export default {
       // }).then((result)=>{
       //   console.log(result);
       // });
-      self.showShare = true;
-      setTimeout(()=>{
-        self.shareStatus = true;
-        self.showShare = false;
-      },3000)
       Service.FileUP(data).then(resp => {
-        console.log(resp);
-        self.showShare = true;
+        console.log(resp.respBody); //userid
+        const id= resp.respBody._id
         setTimeout(()=>{
-          self.shareStatus = true;
-          self.showShare = false;
-        },3000)
+          self.$router.push({path: '/pictureDetail/'+id+'/takePicture' })
+        },1000)
       })
       .catch(error => console.log(error))
     },

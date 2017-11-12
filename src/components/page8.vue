@@ -16,7 +16,7 @@
         <div class="absolute bottom-0 width-100 text-align-center padding-1m bg-000-r textclolor-white" @click="closeVieo">
           关闭
         </div>
-        <video controls="controls" class="width-100" src="../Img/back456.mp4" id="audioPlay" ref="vieoPlay" />
+        <video controls="controls" class="width-100" src="../Img/5s.mp4" id="audioPlay" ref="vieoPlay" />
     </div>
     <img src="../Img/page8_bg.jpg" class="absolute width-100 top-0 zindex-9"/>
   </div>

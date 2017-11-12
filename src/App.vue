@@ -120,6 +120,7 @@ export default {
       localStorage.setItem("FTL_user",username);
       localStorage.setItem("FTL_user_id",userid);
       this.register(userid, username);
+      this.$router.push({path: '/'})
     }
   },
   components: {
