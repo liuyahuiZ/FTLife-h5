@@ -7,11 +7,26 @@
           </div>
         </div>
         <div class="bg-ea3f21-r width-70 margin-left-2r textclolor-white padding-1m-2m">
-            <div class=" line-heightr-2">那些「盛世」的瞬间</div>
-            <div>构成了人生最自豪的篇章</div>
-            <div>而成就「盛世」时刻</div>
-            <div>往往来自</div>
-            <div>身边爱你的人</div>
+            <div class=" line-heightr-2">
+              <span v-show="fontType==='jian'">那些「盛世」的瞬间</span>
+              <span v-show="fontType==='fan'">那些「盛世」的瞬間</span>
+            </div>
+            <div>
+              <span v-show="fontType==='jian'">构成了人生最自豪的篇章</span>
+              <span v-show="fontType==='fan'">構成了人生最自豪的篇章</span>
+            </div>
+            <div>
+              <span v-show="fontType==='jian'">而成就「盛世」时刻</span>
+              <span v-show="fontType==='fan'">而成就【盛世】 時刻</span>
+            </div>
+            <div>
+              <span v-show="fontType==='jian'">往往来自</span>
+              <span v-show="fontType==='fan'">往往來自</span>
+            </div>
+            <div>
+              <span v-show="fontType==='jian'">身边爱你的人的</span>
+              <span v-show="fontType==='fan'">身邊愛你的人的</span>
+            </div>
             <div><img src="../Img/page5_b.png" class="width-30 margin-top-f5r "/></div>
         </div>
         <div class="margin-top-5-d text-align-right">
@@ -36,7 +51,8 @@ import Vue from 'vue'
 export default {
   data () {
     return {
-      btnAnimate: false
+      btnAnimate: false,
+      fontType: sessionStorage.getItem('fontType')
     }
   },
   components: {

@@ -5,15 +5,21 @@
     @mouseup="stopDrag" @touchend="stopDrag" @mouseleave="stopDrag">
       <div class="width-100 relative">
         <img src="../Img/takeText_top.png" class="width-60">
+        <div class="absolute top-1r right-1 width-40 zindex-100 text-align-right">
+            <div class="width-100 heightr-2fr relative margin-bottom-2r">
+                <div class="line-heightr-2fr bg-2A2B2C text-align-left textclolor-white padding-left-f5r font-size-6">{{collected}}/{{AllCollect}}</div>
+                <img src="../Img/hert_group.png" class="widthr-3 heightr-2fr absolute right-0 top-0"/>
+            </div>
+        </div>
       </div>
       <div class="width-70 margin-left-15 relative bg-show zindex-10">
         <img src="../Img/list_top.png" class="width-100">
       </div>
-      <div class="heightv-65 width-90 margin-left-5" :style="contentPosition">
+      <div class="heightv-65 width-70 margin-left-15" :style="contentPosition">
         <div class="loadmore-top" v-if="!refresh" v-bind:class="{ transroute: rotate, transnone: !rotate }">↓</div>
         <div class="loadmore-top" v-if="refresh"><div class="spanner span-inner" ></div></div>
         <swiper :options="swiperOption">
-          <swiper-slide v-for="(L,index) in workListLeft">
+          <swiper-slide v-for="(L,index) in workListLeft" key={{index}}>
              <img class="images-con imgpic" v-bind:src="(config.api+L._id)" @click="goDetail(L._id)">
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -21,7 +27,7 @@
         <div class="loadmore-bottom" v-if="!showloading" v-bind:class="{ transroute: !rotate, transnone: rotate }">↓</div>
         <div class="loadmore-bottom" v-if="showloading"><div class="spanner span-inner"></div></div>
       </div>
-      <div class="width-100 relative">
+      <div class="width-100 absolute bottom-1r">
         <div class="text-align-center bg-53575A textclolor-white line-heightr-3 width-70 margin-left-15 margin-top-2 font-size-8" @click="getMyPicture">
           上传我的盛世和守护
         </div>
@@ -66,6 +72,8 @@ export default {
       pageIndex: 1,
       pageNum: 6,
       allPage: 0,
+      AllCollect: 1000,
+      collected: 0,
       notNextTick: true,
       swiperOption: {
         pagination: '.swiper-pagination',
@@ -104,6 +112,14 @@ export default {
         self.pageIndex = data.page.pageIndex
         self.allPage = data.page.allpage
         self.workListLeft.push(...data.data);
+    })
+    .catch(error => console.log(error))
+
+    Service.Post('collect/findAllCollects',{})
+    .then(resp => {
+        console.log(resp,resp.respBody)
+        let data = resp.respBody;
+        self.collected = data.length;
     })
     .catch(error => console.log(error))
   },
@@ -344,5 +360,11 @@ export default {
     background-size: cover;
     width: 300px;
     height: 300px;
+  }
+  .swiper-container{
+    overflow: inherit!important;
+  }
+  .swiper-pagination{
+    bottom: -12%!important;
   }
 </style>

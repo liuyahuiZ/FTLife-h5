@@ -37,7 +37,7 @@ export default {
     return {
       btnAnimate: false,
       isActive: 'shs',
-      text: '请输入'
+      text: '盛世胸懷成就心，富過三代可成真'
     }
   },
   components: {

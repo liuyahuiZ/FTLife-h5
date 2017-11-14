@@ -5,13 +5,13 @@
             <img class="images-con imgpic" v-bind:src="(config.api+picture._id)">
         </div>
     </div>
-    <div class="absolute top-10 right-5 width-40 zindex-100 text-align-right">
-        <div class="width-100 heightr-3 relative margin-bottom-2r">
-            <div class="line-heightr-3 bg-2A2B2C text-align-left textclolor-white padding-left-1r">{{collect}}/{{AllCollect}}</div>
-            <img src="../Img/hert_group.png" class="widthr-3 heightr-3 absolute right-0 top-0"/>
+    <div class="absolute top-10 right-5 width-40 zindex-100 text-align-right" v-show="from!=='takePicture'">
+        <div class="width-100 heightr-2fr relative margin-bottom-2r">
+            <div class="line-heightr-2fr bg-2A2B2C text-align-left textclolor-white padding-left-1r">{{collect}}/{{AllCollect}}</div>
+            <img src="../Img/hert_group.png" class="widthr-3 heightr-2fr absolute right-0 top-0"/>
         </div>
         <div class="width-100 ">
-            <img src="../Img/do_hert.png" class="widthr-3 heightr-3" @click="doCreat" />
+            <img src="../Img/do_hert.png" class="widthr-3 heightr-2fr" @click="doCreat" />
         </div>
     </div>
     <img src="../Img/heart_icn.png" class="absolute top-1 right-3 display_none" :class="{ 'heart-animate display_block': showHearAnimat }"/>
@@ -29,16 +29,21 @@
       <div class="width-70 margin-left-15 relative margin-top-2 padding-1m bg-ea3f21-r9 textclolor-white padding-bottom-3r">
         <div class="width-70 margin-top-3r font-size-16"> 分享成功</div>
         <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-100 margin-top-3r font-size-8" @click="goWorkList">
-          查看更多「盛世」和「守护」时刻
+          <span v-show="fontType==='jian'">查看更多「盛世」和「守护」时刻</span>
+          <span v-show="fontType==='fan'">查看更多「盛世」和「守護」時刻</span>
         </div>
         <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-100 margin-top-2 font-size-8" @click="goNext">
-          了解真正「盛世」和「守护」
+          <span v-show="fontType==='jian'">了解真正「盛世」和「守护」</span>
+          <span v-show="fontType==='fan'">了解真正「盛世」及「守護」</span>
         </div>
       </div>
     </div>
     <div class="black-bg zindex-110" v-show="showBg" />
     <div class="absolute bottom-0 width-100 zindex-100 text-align-center padding-1m bg-000-r" v-show="showBack">
         <div class="width-70 margin-left-15 bg-show line-heightr-3 textcolor-EF3F24" @click="goWorkList">返回相册</div>
+    </div>
+    <div class="absolute bottom-0 width-100 zindex-200 text-align-center padding-1m bg-000-r" v-show="from==='takePicture'">
+        <img src="../Img/action.png" class="width-20 relative" @click="showShareApp"/>
     </div>
   </div>
 </template>
@@ -64,7 +69,8 @@ export default {
       from: this.$route.params.from,
       AllCollect: 1000,
       showHearAnimat: false,
-      showBack: false
+      showBack: false,
+      fontType: sessionStorage.getItem('fontType')
     }
   },
   components: {
@@ -101,14 +107,6 @@ export default {
                     self.showBack = true
                 } else {
                     if(self.from && self.from==='takePicture') {
-                        setTimeout(()=>{
-                            self.showShare = true;
-                            self.showBg = true;
-                        },4000);
-                        setTimeout(()=>{
-                            self.shareStatus = true;
-                            self.showShare = false;
-                        },15000)
                     } else{
                         self.showBack = true
                     }
@@ -148,11 +146,15 @@ export default {
         .catch(error => console.log(error))
       },
       goWorkList: function(){
-          this.$router.push({path: '/workList'})
+        this.$router.push({path: '/workList'})
       },
       goNext: function(){
-      this.$router.push({path: '/last'})
-    },
+        this.$router.push({path: '/last'})
+      },
+      showShareApp: function(){
+        this.showShare = true;
+        this.showBg = true;
+      }
   }
 }
 </script>

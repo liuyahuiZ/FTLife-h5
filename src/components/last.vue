@@ -6,12 +6,13 @@
         <img src="../Img/takeText_logo.png" class="width-30">
       </div>
       <div class="bg-ea3f21-r9 relative width-70 margin-left-15 textclolor-white font-size-8 padding-1m margin-top-3r padding-bottom-3r">
-          <div><img src="../Img/last_title.png" class="width-60 margin-top-3r"></div>
+          <div class="text-align-center"><img src="../Img/last_title.png" class="width-60 margin-top-3r"></div>
           <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-80 margin-left-10 margin-top-3r" @click="goTakeText">
             了解真正的盛世
           </div>
           <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-80 margin-left-10 margin-top-2" @click="goNext">
-            了解真正的守护
+            <span v-show="fontType==='jian'">了解真正的守护</span>
+            <span v-show="fontType==='fan'">了解真正的守護</span>
           </div>
       </div>
     </div>
@@ -30,7 +31,8 @@ import Vue from 'vue'
 export default {
   data () {
     return {
-      btnAnimate: false
+      btnAnimate: false,
+      fontType: sessionStorage.getItem('fontType')
     }
   },
   components: {
@@ -41,9 +43,11 @@ export default {
   methods: {
       goNext: function() {
         // this.$router.push({path: '/takePicture' })
+        window.location="https://www.ftlife.com.hk/tc/products/life-insurance/savings/regent-series.html";
       },
       goTakeText: function() {
         // this.$router.push({path: '/takeText' })
+        window.location="https://www.ftlife.com.hk/healthmanager/index.html";
       }
   }
 }

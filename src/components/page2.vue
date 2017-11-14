@@ -5,7 +5,10 @@
           <div class="bg-ea3f21-r width-70 margin-top-3r margin-left-30 textclolor-white padding-1m-2m font-size-12" :class="{ 'padding-1m': showPicture=== true }">
               <div class="line-heightr-2" :class="{ 'font-size-9': showPicture=== true }">我的盛世</div>
               <div :class="{ 'font-size-7': showPicture=== true, 'font-size-8': showPicture=== false }">是握着你稚嫩的手</div>
-              <div :class="{ 'font-size-7': showPicture=== true, 'font-size-8': showPicture=== false }">将祖辈的智慧传承下去</div>
+              <div :class="{ 'font-size-7': showPicture=== true, 'font-size-8': showPicture=== false }">
+                <span v-show="fontType==='jian'">将祖辈的智慧传承下去</span>
+                <span v-show="fontType==='fan'">將祖輩的智慧傳承下去</span>
+              </div>
           </div>
       </div>
       <div class="absolute width-20 my-pic-bottom zindex-10" v-if="showPicture">
@@ -47,6 +50,7 @@ export default {
     return {
       btnAnimate: false,
       showPicture: false,
+      fontType: sessionStorage.getItem('fontType')
     }
   },
   components: {

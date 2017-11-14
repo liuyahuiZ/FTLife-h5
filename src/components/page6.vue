@@ -3,10 +3,19 @@
     <div class="main-home" :class="{ 'picture-screen zindex-200': showPicture=== true }">
       <div class="box-flex relative flex-direction-column zindex-10" >
           <div class="bg-ea3f21-r width-70 margin-top-3r margin-left-30 textclolor-white padding-1m-2m font-size-12" :class="{ 'padding-1m': showPicture=== true }">
-              <div :class="{ 'font-size-6': showPicture=== true, 'font-size-8': showPicture=== false }">我抱着软软糯糯的你</div>
-              <div :class="{ 'font-size-6': showPicture=== true, 'font-size-8': showPicture=== false }">就算是在沙发上</div>
+              <div :class="{ 'font-size-6': showPicture=== true, 'font-size-8': showPicture=== false }">
+                <span v-show="fontType==='jian'">我抱着软软糯糯的你</span>
+                <span v-show="fontType==='fan'">我抱著軟軟糯糯的你</span>
+              </div>
+              <div :class="{ 'font-size-6': showPicture=== true, 'font-size-8': showPicture=== false }">
+                <span v-show="fontType==='jian'">就算是在沙发上</span>
+                <span v-show="fontType==='fan'">就算是在沙發上</span>
+              </div>
               <div :class="{ 'font-size-6': showPicture=== true, 'font-size-8': showPicture=== false }">也能熟睡</div>
-              <div class="line-heightr-2" :class="{ 'font-size-7': showPicture=== true, 'font-size-10': showPicture=== false }">我要守护你的每一个梦</div>
+              <div class="line-heightr-2" :class="{ 'font-size-7': showPicture=== true, 'font-size-10': showPicture=== false }">
+                <span v-show="fontType==='jian'">我要守护你的每一个梦</span>
+                <span v-show="fontType==='fan'">我要守護你的每一個夢</span>
+              </div>
           </div>
       </div>
       <div class="absolute width-20 my-pic-bottom zindex-10" v-if="showPicture">
@@ -48,6 +57,7 @@ export default {
     return {
       btnAnimate: false,
       showPicture: false,
+      fontType: sessionStorage.getItem('fontType')
     }
   },
   components: {

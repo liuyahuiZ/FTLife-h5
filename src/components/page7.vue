@@ -3,10 +3,22 @@
     <div class="main-home" :class="{ 'picture-screen zindex-200': showPicture=== true }">
       <div class="box-flex relative flex-direction-column zindex-10" >
           <div class="bg-ea3f21-r width-75 margin-top-3r margin-left-25 textclolor-white padding-1m font-size-12" :class="{ 'padding-1m': showPicture=== true }">
-              <div :class="{ 'font-size-6': showPicture=== true, 'font-size-8': showPicture=== false }">我扶着颤颤巍巍学骑单车的你</div>
-              <div :class="{ 'font-size-6': showPicture=== true, 'font-size-8': showPicture=== false }">慢慢放开手</div>
-              <div :class="{ 'font-size-6': showPicture=== true, 'font-size-8': showPicture=== false }">看你疾驰出去</div>
-              <div class="line-heightr-2" :class="{ 'font-size-7': showPicture=== true, 'font-size-10': showPicture=== false }">我要守护你成长的每一步</div>
+              <div :class="{ 'font-size-6': showPicture=== true, 'font-size-8': showPicture=== false }">
+                <span v-show="fontType==='jian'">我扶着颤颤巍巍学骑单车的你</span>
+                <span v-show="fontType==='fan'">我扶著顫顫巍巍學騎單車的你</span>
+              </div>
+              <div :class="{ 'font-size-6': showPicture=== true, 'font-size-8': showPicture=== false }">
+                <span v-show="fontType==='jian'">慢慢放开手</span>
+                <span v-show="fontType==='fan'">慢慢放開手</span>
+              </div>
+              <div :class="{ 'font-size-6': showPicture=== true, 'font-size-8': showPicture=== false }">
+                <span v-show="fontType==='jian'">看你疾驰出去</span>
+                <span v-show="fontType==='fan'">看你疾馳出去</span>
+              </div>
+              <div class="line-heightr-2" :class="{ 'font-size-7': showPicture=== true, 'font-size-10': showPicture=== false }">
+                <span v-show="fontType==='jian'">我要守护你成长的每一步</span>
+                <span v-show="fontType==='fan'">我要守護你成長的每一步</span>
+              </div>
           </div>
       </div>
       <div class="absolute width-20 my-pic-bottom zindex-10" v-if="showPicture">
@@ -48,6 +60,7 @@ export default {
     return {
       btnAnimate: false,
       showPicture: false,
+      fontType: sessionStorage.getItem('fontType')
     }
   },
   components: {

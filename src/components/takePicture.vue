@@ -1,5 +1,30 @@
 <template>
 <div class="main-home relative bg-show">
+    <div class="box-flex relative flex-direction-column zindex-10" v-show="!showImgBox">
+      <div class="width-100 relative">
+        <img src="../Img/takeText_top.png" class="width-60">
+        <img src="../Img/takeText_logo.png" class="width-30">
+      </div>
+      <div class="width-70 box-flex text-align-center font-size-12 line-heightr-3 relative margin-left-15 margin-top-3r margin-bottom-1">
+        <div class="width-50 bg-show textcolor-EF3F24 margin-right-1" :class="{ 'bg-ea3f21-r9 textclolor-white': isActive=== 'shs' }" @click="setActive('shs')">盛世</div>
+        <div class="width-50 bg-show textcolor-EF3F24" :class="{ 'bg-ea3f21-r9 textclolor-white': isActive=== 'sh' }" @click="setActive('sh')">
+          <span v-show="fontType==='jian'">守护</span>
+          <span v-show="fontType==='fan'">守護</span>
+        </div>
+      </div>
+      <div class="bg-ea3f21-r9 relative width-70 margin-left-15 textclolor-white font-size-8 padding-1m ">
+          <textarea class="width-100 heightr-9 font-size-12" v-model="textInfo" />
+          <img src="../Img/change.png" class="absolute widthr-4 top-9r right-1r" @click="changeWrod()"/>
+          <div class="margin-top-2">1.选择盛世或者守护</div>
+          <div>2.选择或者输入你想要合成的文字</div>
+          <div>3.点击拍照按钮选择你想要合成的照片</div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 width-100 zindex-200 text-align-center padding-1m bg-000-r">
+        <div class="width-100 textclolor-white margin-bottom-3 font-size-8 ">上传或者立刻拍摄你的“盛世”、“守护”时刻</div>
+        <img src="../Img/action.png" class="width-20 relative" @click="EditImg"/>
+    </div>
+    <img src="../Img/takeText_bg.jpg" class="absolute width-100 top-0 zindex-9"/>
     <div align="center" class="main-screen" v-show="!showImgBox" ref="mainScreen">
         <img class="photo-img" ref="selectImg" v-bind:src="(selectImgSrc)" @click='EditImg' alt="" />
         <img src="../Img/pic_hover.png" class="hover-img">
@@ -14,10 +39,11 @@
     <div class="options">
       <input id="hideenInput" class="hideenInput" type="file" accept="image/*" @change="inputChange"  ref="hideenInput" />
     </div>
-    <div class="absolute bottom-0 width-100 zindex-100 text-align-center padding-1m bg-000-r">
-        <img src="../Img/action.png" class="width-20 relative" @click="EditImg"/>
+    <div class="loadings" v-show="showLoading">
+      <div class="text-align-center zindex-200 textclolor-white">图片生成中...</div>
+      <vue-loading type="cylon" color="#fff" :size="{ width: '50px', height: '50px' }"></vue-loading>
     </div>
-    <img src="../Img/takePicture_bg.jpg" class="absolute width-100 top-0 zindex-9"/>
+    <div class="black-bg zindex-110" v-show="showLoading" />
 </div>
 </template>
 <script>
@@ -25,6 +51,7 @@ import Service from '@/util/service'
 import configs from '@/util/configs'
 import '@/util/canvas2image'
 import EXIF from'@/util/exif'
+import vueLoading from 'vue-loading-template'
 
 export default {
   data () {
@@ -34,8 +61,19 @@ export default {
       imgBox: '',
       showImgBox: false,
       Orientation: null,
-      textTitle: sessionStorage.type,
-      textInfo: sessionStorage.text,
+      textTitle: '盛世',
+      textInfo: '盛世胸懷成就心，富過三代可成真',
+      showLoading: false,
+      isActive: 'shs',
+      fontType: sessionStorage.getItem('fontType'),
+      SHwordArr: {
+        'fan': ['守護心常伴左右，健康人生由您擁有','無懼心是一份信任，來自無微不至的守護','讓您無憂開拓健康未來才是真守護','呵護一生才是真守護','守護您，讓人生不留遺憾'],
+        'jian': ['守护心常伴左右，健康人生由您拥有','无惧心是一份信任，来自无微不至的守护','让您无忧开拓健康未来才是真守护','呵护一生才是真守护','守护您，让人生不留遗憾']
+      },
+      SHSwordArr: {
+        'fan': ['盛世胸懷成就心，富過三代可成真','傳承不止於財富，更是造就盛世的家族心','盛世人生，代代相傳','富過三代才是真傳承','有一種盛世叫傳承'],
+        'jian': ['盛世胸怀成就心，富过三代可成真','传承不止于财富，更是造就盛世的家族心','盛世人生，代代相传','富过三代才是真传承','有一种盛世叫传承']
+      }
     }
   },
   watch: {
@@ -47,6 +85,9 @@ export default {
     let msg = localStorage.getItem("wetalks_user");
     console.log(msg)
     
+  },
+  components: {
+      vueLoading
   },
   methods: {
     EditImg() {
@@ -109,11 +150,11 @@ export default {
                   if(navigator.userAgent.match(/iphone/i)){
                     if(self.Orientation === 6){
                       if(n===0) {
-                        alert('需要顺时针（向左）90度旋转');
+                        // alert('需要顺时针（向左）90度旋转');
                         ctx.rotate(90 * Math.PI / 180);
                         ctx.drawImage(img, 0, -_width, _height, _width);
                       } else if(n===1){
-                        alert('文字框需要顺时针（向左）270度旋转');
+                        // alert('文字框需要顺时针（向左）270度旋转');
                         ctx.rotate(270 * Math.PI / 180);
                         ctx.drawImage(img,0,0,_width, _height);
                       }
@@ -128,14 +169,14 @@ export default {
               }
           }else{
             //保存生成作品图片
-            let info = '我的'+sessionStorage.getItem('type')
+            let info = '我的'+self.textTitle;
             ctx.font="19px Verdana";
             // 用渐变填色
             ctx.fillStyle='#fff';
 
             ctx.fillText(info,20,430);
 
-            let text = sessionStorage.getItem('text')
+            let text = self.textInfo;
             ctx.font="15px Verdana";
             // 用渐变填色
             ctx.fillStyle='#fff';
@@ -165,21 +206,47 @@ export default {
       // }).then((result)=>{
       //   console.log(result);
       // });
+      self.showLoading= true;
       Service.FileUP(data).then(resp => {
         console.log(resp.respBody); //userid
         const id= resp.respBody._id
+        self.showLoading = false;
         setTimeout(()=>{
           self.$router.push({path: '/pictureDetail/'+id+'/takePicture' })
         },1000)
       })
-      .catch(error => console.log(error))
+      .catch(error => {console.log(error); self.showLoading = false;})
     },
     getMore: function(){
       this.$router.push({path: '/workList'})
     },
-    goNext: function(){
-      this.$router.push({path: '/last'})
+    setActive: function(wod) {
+      this.isActive= wod;
+      if(wod==='shs'){
+        this.textTitle='盛世';
+      } else{
+        this.textTitle='守护';
+      }
+    },
+    changeWrod: function() {
+      console.log(this.isActive);
+      if(this.isActive==='shs'){
+        this.textInfo= this.SHSwordArr[this.fontType][Math.round(Math.random()*4)]
+      } else{
+        this.textInfo= this.SHwordArr[this.fontType][Math.round(Math.random()*4)]
+      }
+      
     }
   }
 }
 </script>
+<style>
+.loadings{
+  position: absolute;
+    top: 50%;
+    z-index: 120;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+</style>
+

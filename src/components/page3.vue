@@ -2,10 +2,16 @@
   <div class="main-home relative bg-show" id="home">
     <div class="main-home" :class="{ 'picture-screen zindex-200': showPicture=== true }">
       <div class="box-flex relative flex-direction-column zindex-10" >
-          <div class="bg-00A1E4-r width-65 margin-top-5r textclolor-white padding-1m-2m font-size-12" :class="{ 'padding-1m': showPicture=== true }">
+          <div class="bg-00A1E4-r width-65 margin-top-5r textclolor-white padding-1m font-size-12" :class="{ 'padding-1m': showPicture=== true }">
               <div class="line-heightr-2" :class="{ 'font-size-9': showPicture=== true }">我的盛世</div>
-              <div :class="{ 'font-size-7': showPicture=== true, 'font-size-8': showPicture=== false }">是镜子里的那个小大人</div>
-              <div :class="{ 'font-size-7': showPicture=== true, 'font-size-8': showPicture=== false }">将把我的事业传承下去</div>
+              <div :class="{ 'font-size-7': showPicture=== true, 'font-size-8': showPicture=== false }">
+                <span v-show="fontType==='jian'">是镜子里的那个小大人</span>
+                <span v-show="fontType==='fan'">是知道鏡子裡的那個小大人</span>
+              </div>
+              <div :class="{ 'font-size-7': showPicture=== true, 'font-size-8': showPicture=== false }">
+                <span v-show="fontType==='jian'">将把我的事业传承下去</span>
+                <span v-show="fontType==='fan'">將把我的事業傳承下去</span>
+              </div>
           </div>
       </div>
       <div class="absolute width-20 my-pic-bottom zindex-10" v-if="showPicture">
@@ -47,6 +53,7 @@ export default {
     return {
       btnAnimate: false,
       showPicture: false,
+      fontType: sessionStorage.getItem('fontType')
     }
   },
   components: {

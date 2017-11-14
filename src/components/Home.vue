@@ -23,6 +23,9 @@
         <div class="absolute bottom-0 bg-activity-status width-100 heightr-1 overflow-hide" >
             <img src="../Img/loading_bar.png" class="width-100 heightr-1 loading relative" />
         </div>
+        <div class="absolute top-0 bg-activity-status width-100 heightr-1 overflow-hide" >
+            <img src="../Img/loading_bar.png" class="width-100 heightr-1 loading relative" />
+        </div>
     </div>
   </div>
 </template>
