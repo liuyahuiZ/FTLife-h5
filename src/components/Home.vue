@@ -1,5 +1,6 @@
 <template>
   <div class="main-home relative bg-show" id="home">
+    <img src="../Img/title.jpg" class="display_none">
     <div class="box-flex flex-direction-column" >
         <div class="padding-all-2rem margin-top-5r">
            <img src="../Img/home_title.png" class="images-con">

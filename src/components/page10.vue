@@ -12,7 +12,7 @@
               <span v-show="fontType==='fan'">讓大家為你的时刻給心</span>
             </div>
             <div>
-              <span v-show="fontType==='jian'">同事你也可以为别人的时刻给心</span>
+              <span v-show="fontType==='jian'">同时你也可以为别人的时刻给心</span>
               <span v-show="fontType==='fan'">同時你也可以為別人的時刻給心</span>
             </div>
             <div class="absolute top-0 left-0 text-align-left ">
@@ -53,8 +53,8 @@
               <span v-show="fontType==='fan'">先看看去給心</span>
             </div>
             <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-70 margin-left-15 margin-top-2" @click="goLast">
-              <span v-show="fontType==='jian'">了解真正的盛世和守护</span>
-              <span v-show="fontType==='fan'">了解真正盛世及守護</span>
+              <span v-show="fontType==='jian'">了解真正的「盛世」和「守护」</span>
+              <span v-show="fontType==='fan'">了解真正「盛世」及「守護」</span>
             </div>
         </div>
     </div>

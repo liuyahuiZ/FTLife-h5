@@ -5,7 +5,7 @@
             <img class="images-con imgpic" v-bind:src="(config.api+picture._id)">
         </div>
     </div>
-    <div class="absolute top-10 right-5 width-40 zindex-100 text-align-right" v-show="from!=='takePicture'">
+    <div class="absolute top-10 right-5 width-40 zindex-100 text-align-right" v-show="showzan">
         <div class="width-100 heightr-2fr relative margin-bottom-2r">
             <div class="line-heightr-2fr bg-2A2B2C text-align-left textclolor-white padding-left-1r">{{collect}}/{{AllCollect}}</div>
             <img src="../Img/hert_group.png" class="heightr-2fr absolute right-0 top-0"/>
@@ -15,7 +15,7 @@
         </div>
     </div>
     <img src="../Img/heart_icn.png" class="absolute top-1 right-3 display_none" :class="{ 'heart-animate display_block': showHearAnimat }"/>
-    <div class="absolute top-1 right-3 width-30 zindex-200" v-show="showShare" @click="goShare">
+    <div class="absolute top-1 right-3 width-30 zindex-200" v-show="showShare">
         <img src="../Img/shareto.png" class="width-100 relative"/>
     </div>
     <div class="absolute main-home top-0 zindex-200" v-show="shareStatus">
@@ -42,7 +42,13 @@
     <div class="absolute bottom-0 width-100 zindex-100 text-align-center padding-1m bg-000-r" v-show="showBack">
         <div class="width-70 margin-left-15 bg-show line-heightr-3 textcolor-EF3F24" @click="goWorkList">返回相册</div>
     </div>
-    <div class="absolute bottom-0 width-100 zindex-200 text-align-center padding-1m bg-000-r" v-show="from==='takePicture'">
+    <div class="absolute bottom-0 width-100 zindex-200 text-align-center padding-1m bg-000-r" v-show="showNoShare">
+        <div class="width-70 margin-left-15 bg-show line-heightr-3 textcolor-EF3F24" @click="goNext">暂不分享</div>
+    </div>
+    <div class="absolute bottom-0 width-100 zindex-100 text-align-center padding-1m bg-000-r" v-show="showMyplay">
+        <div class="width-70 margin-left-15 bg-show line-heightr-3 textcolor-EF3F24" @click="goHome">我也要玩</div>
+    </div>
+    <div class="absolute bottom-0 width-100 zindex-200 text-align-center padding-1m bg-000-r" v-show="showoption">
         <img src="../Img/action.png" class="width-20 relative" @click="showShareApp"/>
     </div>
   </div>
@@ -71,7 +77,11 @@ export default {
       AllCollect: 1680,
       showHearAnimat: false,
       showBack: false,
-      fontType: sessionStorage.getItem('fontType')
+      showzan: false,
+      showoption: false,
+      fontType: sessionStorage.getItem('fontType'),
+      showMyplay: false,
+      showNoShare: false
     }
   },
   components: {
@@ -83,22 +93,77 @@ export default {
     const self = this;
     this.getPicture();
     this.getSelect();
-    wx.config({
-        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-        appId: '', // 必填，公众号的唯一标识
-        timestamp: '', // 必填，生成签名的时间戳
-        nonceStr: '', // 必填，生成签名的随机串
-        signature: '',// 必填，签名，见附录1
-        jsApiList: [] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-    });
-    // console.log('beforeCreate is triggered.')
+    this.getSign();
   },
   methods: {
+      getSign: function() {
+        const self = this;
+        let reqbody={
+        "id" : this.$route.params.id
+        }
+        Service.Post('wx/sign',reqbody)
+        .then(data => {
+          console.log(data,data.respBody)
+           wx.config({
+              debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+              appId: 'wxdbe18f838fcee2ba', // 必填，公众号的唯一标识
+              timestamp: data.respBody.timestamp, // 必填，生成签名的时间戳
+              nonceStr: data.respBody.noncestr, // 必填，生成签名的随机串
+              signature: data.respBody.signature,// 必填，签名，见附录1
+              jsApiList: [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone'
+              ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          });
+          wx.ready(()=>{
+            console.log('wx.ready');
+          });
+
+          wx.error(function(res){
+
+            console.log('wx err',res);
+
+            //可以更新签名
+          });
+          wx.onMenuShareTimeline({
+              title: '富通保险奉献爱心大行动', // 分享标题
+              link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              imgUrl: 'http://futong.1dospace.com/images/title.jpg', // 分享图标
+              success: function () { 
+                  // 用户确认分享后执行的回调函数
+                  self.goShare()
+              },
+              cancel: function () { 
+                  // 用户取消分享后执行的回调函数
+              }
+          });
+          wx.onMenuShareAppMessage({
+              title: '富通保险奉献爱心大行动', // 分享标题
+              desc: '与富通保险一起用行动「守护」，让每一个人都有机会追逐属于自己的「盛世」', // 分享描述
+              link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              imgUrl: 'http://futong.1dospace.com/images/title.jpg', // 分享图标
+              type: 'link', // 分享类型,music、video或link，不填默认为link
+              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+              success: function () { 
+                  // 用户确认分享后执行的回调函数
+                  self.goShare()
+              },
+              cancel: function () { 
+                  // 用户取消分享后执行的回调函数
+              }
+          });
+        })
+        .catch(error => console.log(error))
+      },
       goShare: function(){
         const self = this;
         console.log('goShare');
         self.shareStatus = true;
         self.showShare = false;
+        self.showBg = true;
       },
       getPicture: function() {
         const self = this;
@@ -113,11 +178,19 @@ export default {
             console.log(userid,self.picture.userid)
             if(userid && self.picture.userid) {
                 if(userid!==self.picture.userid) {
-                    self.showBack = true
-                } else {
                     if(self.from && self.from==='takePicture') {
+                        self.showMyplay = true;
+                        self.showzan = true;
                     } else{
                         self.showBack = true
+                        self.showzan = true;
+                    }
+                } else {
+                    if(self.from && self.from==='takePicture') {
+                      self.showoption = true;
+                    } else{
+                        self.showBack = true
+                        self.showzan = true;
                     }
                 }
             }
@@ -160,9 +233,14 @@ export default {
       goNext: function(){
         this.$router.push({path: '/last'})
       },
+      goHome: function(){
+        this.$router.push({path: '/'})
+      },
       showShareApp: function(){
         this.showShare = true;
         this.showBg = true;
+        this.showoption = false;
+        this.showNoShare = true;
       }
   }
 }

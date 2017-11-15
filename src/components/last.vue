@@ -43,11 +43,11 @@ export default {
   methods: {
       goNext: function() {
         // this.$router.push({path: '/takePicture' })
-        window.location="https://www.ftlife.com.hk/tc/products/life-insurance/savings/regent-series.html";
+        window.location="https://www.ftlife.com.hk/healthmanager/index.html";
       },
       goTakeText: function() {
         // this.$router.push({path: '/takeText' })
-        window.location="https://www.ftlife.com.hk/healthmanager/index.html";
+        window.location="https://www.ftlife.com.hk/tc/products/life-insurance/savings/regent-series.html";
       }
   }
 }

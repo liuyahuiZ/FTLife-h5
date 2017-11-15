@@ -4,8 +4,8 @@
         <img src="../Img/takeText_top.png" class="width-60">
         <img src="../Img/page1_logo.png" class="width-30">
     </div>
-    <div class="absolute top-12r width-100 zindex-200 text-align-center padding-1m" @click="playVieo">
-      <video controls="controls" class="width-100" src="../Img/shouhu.mp4" id="audioPlay" ref="vieoPlay" />
+    <div class="absolute top-30 width-100 zindex-200 text-align-center padding-1m" @click="playVieo">
+      <video controls="controls" class="width-100" poster="http://47.52.234.192/images/page8_video.png" src="../Img/shouhu.mp4" id="audioPlay" ref="vieoPlay" />
     </div>
     <div class="absolute top-6r right-0 width-70 zindex-200 text-align-left">
       <div class="bg-ea3f21-r width-100 textclolor-white padding-1m-2m font-size-12">
