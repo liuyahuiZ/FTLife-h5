@@ -44,15 +44,15 @@
               <span v-show="fontType==='jian'">他们人生的「盛世」时刻</span>
               <span v-show="fontType==='fan'">他們人生的「盛世」時刻</span>
             </div>
-            <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-70 margin-left-15 margin-top-2" @click="goTakeText">
+            <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-80 margin-left-10 margin-top-2" @click="goTakeText">
               <span v-show="fontType==='jian'">立马上传</span>
               <span v-show="fontType==='fan'">立馬上傳</span>
             </div>
-            <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-70 margin-left-15 margin-top-2" @click="goWorkList">
+            <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-80 margin-left-10 margin-top-2" @click="goWorkList">
               <span v-show="fontType==='jian'">先去看看给心</span>
               <span v-show="fontType==='fan'">先看看去給心</span>
             </div>
-            <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-70 margin-left-15 margin-top-2" @click="goLast">
+            <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-80 margin-left-10 margin-top-2" @click="goLast">
               <span v-show="fontType==='jian'">了解真正的「盛世」和「守护」</span>
               <span v-show="fontType==='fan'">了解真正「盛世」及「守護」</span>
             </div>

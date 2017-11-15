@@ -15,17 +15,17 @@
       <div class="width-70 margin-left-15 relative bg-show zindex-10">
         <img src="../Img/list_top.png" class="width-100">
       </div>
-      <div class="heightv-65 width-70 margin-left-15 overflow-hide" :style="contentPosition">
-        <div class="loadmore-top" v-if="!refresh" v-bind:class="{ transroute: rotate, transnone: !rotate }">↓</div>
-        <div class="loadmore-top" v-if="refresh"><div class="spanner span-inner" ></div></div>
+      <div class="heightv-65 width-70 margin-left-15" :style="contentPosition">
+        <div class="loadmore-top display_none" v-if="!refresh" v-bind:class="{ transroute: rotate, transnone: !rotate }">↓</div>
+        <div class="loadmore-top display_none" v-if="refresh"><div class="spanner span-inner" ></div></div>
         <swiper :options="swiperOption">
           <swiper-slide v-for="(L,index) in workListLeft" key={{index}}>
              <img class="images-con imgpic" v-bind:src="(config.api+L._id)" @click="goDetail(L._id)">
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
-        <div class="loadmore-bottom" v-if="!showloading" v-bind:class="{ transroute: !rotate, transnone: rotate }">↓</div>
-        <div class="loadmore-bottom" v-if="showloading"><div class="spanner span-inner"></div></div>
+        <div class="loadmore-bottom display_none" v-if="!showloading" v-bind:class="{ transroute: !rotate, transnone: rotate }">↓</div>
+        <div class="loadmore-bottom display_none" v-if="showloading"><div class="spanner span-inner"></div></div>
       </div>
       <div class="width-100 absolute bottom-1r">
         <div class="text-align-center bg-53575A textclolor-white line-heightr-3 width-70 margin-left-15 margin-top-2 font-size-8" @click="getMyPicture">

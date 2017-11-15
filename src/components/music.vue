@@ -13,7 +13,7 @@ export default {
   methods: {
     play: function() {
         const myVid = this.$refs.audioPlay;
-        myVid.play();
+        // myVid.play();
     }
   },
   components: {

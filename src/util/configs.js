@@ -1,8 +1,8 @@
 let config = {
-    'api': 'http://localhost:2019/files/getImage?file=',
-    'imgurl':'http://localhost:2016/readfPhoto/',
+    'api': 'http://47.52.234.192:8019/files/getImage?file=',
+    'imgurl':'http://47.52.234.192:2016/readfPhoto/',
     'ip':'47.52.234.192',
-    'apiHost':'http://localhost:2019/',
+    'apiHost':'http://47.52.234.192:8019/',
     'fileUp': 'files/fileUp'
 }
 // 47.52.234.192:8019

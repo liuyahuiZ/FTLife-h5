@@ -21,7 +21,7 @@
     <div class="absolute main-home top-0 zindex-200" v-show="shareStatus">
       <div class="width-100 relative">
         <img src="../Img/takeText_top.png" class="width-60">
-        <img src="../Img/takeText_logo.png" class="width-30">
+        <img src="../Img/page1_logo.png" class="width-30">
       </div>
       <div class="width-70 margin-left-15 margin-top-3r relative">
         <img src="../Img/share_text.png" class="width-100">
@@ -43,7 +43,7 @@
         <div class="width-70 margin-left-15 bg-show line-heightr-3 textcolor-EF3F24" @click="goWorkList">返回相册</div>
     </div>
     <div class="absolute bottom-0 width-100 zindex-200 text-align-center padding-1m bg-000-r" v-show="showNoShare">
-        <div class="width-70 margin-left-15 bg-show line-heightr-3 textcolor-EF3F24" @click="goNext">暂不分享</div>
+        <div class="width-70 margin-left-15 bg-show line-heightr-3 textcolor-EF3F24" @click="goNoShare">暂不分享</div>
     </div>
     <div class="absolute bottom-0 width-100 zindex-100 text-align-center padding-1m bg-000-r" v-show="showMyplay">
         <div class="width-70 margin-left-15 bg-show line-heightr-3 textcolor-EF3F24" @click="goHome">我也要玩</div>
@@ -105,7 +105,7 @@ export default {
         .then(data => {
           console.log(data,data.respBody)
            wx.config({
-              debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+              debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
               appId: 'wxdbe18f838fcee2ba', // 必填，公众号的唯一标识
               timestamp: data.respBody.timestamp, // 必填，生成签名的时间戳
               nonceStr: data.respBody.noncestr, // 必填，生成签名的随机串
@@ -232,6 +232,9 @@ export default {
       },
       goNext: function(){
         this.$router.push({path: '/last'})
+      },
+      goNoShare: function() {
+        this.$router.push({path: '/page10'})
       },
       goHome: function(){
         this.$router.push({path: '/'})

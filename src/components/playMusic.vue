@@ -1,0 +1,41 @@
+<template>
+    <div >
+       <div class="display_none">
+        <audio src="../Img/bgm.mp3" loop="loop" id="audioPlay" ref="bgm" />
+      </div>
+      <div class="absolute right-1r top-2r zindex-900">
+        <img src="../Img/music.png" class="widthr-2" v-show="playstatus" @click="pruesmusic"/>
+        <img src="../Img/music-off.png" class="widthr-2" v-show="!playstatus" @click="playmusic"/>
+      </div>
+    </div>
+</template>
+<script>
+export default {
+  data () {
+    return {
+      author: 'Jinkey',
+      playstatus: false
+    }
+  },
+  created: function () {
+    const self = this;
+    setTimeout(()=>{
+      self.playmusic()
+    },1000)
+  },
+  methods: {
+    playmusic: function() {
+        const myVid = this.$refs.bgm;
+        myVid.play();
+        this.playstatus = true;
+    },
+    pruesmusic: function() {
+      const myVid = this.$refs.bgm;
+      myVid.pause();
+      this.playstatus = false;
+    }
+  },
+  components: {
+  }
+}
+</script>

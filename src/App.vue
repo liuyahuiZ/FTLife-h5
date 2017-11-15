@@ -1,5 +1,6 @@
 <template>
   <div class="page-content">
+  <playMusic ref="audio"  />
   <transition  :name="transitionName" :mode="transModule" >
     <router-view class="view"></router-view>
   </transition>
@@ -8,6 +9,7 @@
 <script>
 import Service from '@/util/service'
 import H from './util/history.js'
+import playMusic from '@/components/playMusic'
 import 'animate.css'
 console.log(H.history)
 export default {
@@ -23,7 +25,7 @@ export default {
       totitle: '',
       fromtitle: '',
       transName: {},
-      scrolled: false
+      scrolled: false,
     }
   },
   beforeRouteEnter (to, from, next) {
@@ -56,6 +58,25 @@ export default {
       console.log(this.transitionName)
       document.body.scrollTop=0
     }
+  },
+  created: function () {
+    window.addEventListener('scroll', this.handleScroll)
+    let msg = localStorage.getItem("FTL_user");
+    if(msg){
+      console.log(msg)
+    }else{
+      let tmp_name = (Date.parse(new Date())/1000);
+      let userid = tmp_name + '_' + (Math.round(Math.random()*9999));
+      let username = 'FTLsuser_' + this.randomString(9)
+      localStorage.setItem("FTL_user",username);
+      localStorage.setItem("FTL_user_id",userid);
+      this.register(userid, username);
+    }
+    const self = this;
+    setTimeout(()=>{
+      const myVid = self.$refs.audio;
+      myVid.playmusic();
+    },2000)
   },
   methods: {
     inarray: function (arr, item) {
@@ -106,23 +127,10 @@ export default {
           console.log(resp,resp.respBody)
       })
       .catch(error => console.log(error));
-  },
-  },
-  created: function () {
-    window.addEventListener('scroll', this.handleScroll)
-    let msg = localStorage.getItem("FTL_user");
-    if(msg){
-      console.log(msg)
-    }else{
-      let tmp_name = (Date.parse(new Date())/1000);
-      let userid = tmp_name + '_' + (Math.round(Math.random()*9999));
-      let username = 'FTLsuser_' + this.randomString(9)
-      localStorage.setItem("FTL_user",username);
-      localStorage.setItem("FTL_user_id",userid);
-      this.register(userid, username);
-    }
+    },
   },
   components: {
+    playMusic
   }
 }
 </script>

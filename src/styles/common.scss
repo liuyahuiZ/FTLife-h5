@@ -26,6 +26,7 @@ div{box-sizing:border-box;-webkit-tap-highlight-color:rgba(255,255,255,0)}
 .zindex-100{z-index: 100;}
 .zindex-110{z-index: 110;}
 .zindex-200{z-index: 200;}
+.zindex-900{z-index: 900;}
 .zindex-d10{z-index: -10;}
 /*border_radius*/
 $animal-list:3,6,9;
@@ -157,7 +158,7 @@ $heightv-list:60,65;
 .padding-1m{padding: 1rem;}
 $breakpoint-map: (
     left-1: (p: left,v:1%),left-f5r: (p: left,v:0.5rem),left-1r: (p: left,v:1rem),left-2r: (p: left, v:2rem),left-3: (p: left, v:3%), left-5: (p: left,v:5%),left-d-5: (p: left,v:5px),left-10: (p: left,v:10%),left-15: (p: left,v:15%),left-20x: (p: left,v:20px),left-20: (p: left,v:20%),left-30x: (p: left,v:30px),left-25: (p: left,v:25%),left-30: (p: left,v:30%),
-    top-0: (p: top,v:0), top-f5r: (p: top,v:0.5rem), top-1: (p: top,v:1%),top-1r: (p: top,v:1rem),top-2: (p: top, v:3%),top-3r: (p: top, v:3rem),top-5r: (p: top, v:5rem),top-6r: (p: top, v:6rem), top-5: (p: top,v:5%),top-5-d: (p: top,v:-5%),top-5x: (p: top,v:5px),top-9r: (p: top,v:9rem),top-10: (p: top,v:10%),top-d-10:(p: top,v:-10px),top-d-20:(p: top,v:-20%),top-30:(p: top,v:30%),top-d-23:(p: top,v:-23%),top-60x:(p: top,v:60px),top-11r: (p: top,v:11rem),top-12r: (p: top,v:12rem),top-120x:(p: top,v:120px),top-300x:(p: top,v:300px),
+    top-0: (p: top,v:0), top-f5r: (p: top,v:0.5rem), top-1: (p: top,v:1%),top-1r: (p: top,v:1rem),top-2r: (p: top, v:2rem),top-2: (p: top, v:3%),top-3r: (p: top, v:3rem),top-5r: (p: top, v:5rem),top-6r: (p: top, v:6rem), top-5: (p: top,v:5%),top-5-d: (p: top,v:-5%),top-5x: (p: top,v:5px),top-9r: (p: top,v:9rem),top-10: (p: top,v:10%),top-d-10:(p: top,v:-10px),top-d-20:(p: top,v:-20%),top-30:(p: top,v:30%),top-d-23:(p: top,v:-23%),top-60x:(p: top,v:60px),top-11r: (p: top,v:11rem),top-12r: (p: top,v:12rem),top-120x:(p: top,v:120px),top-300x:(p: top,v:300px),
     right-0: (p: right,v:0%),right-1: (p: right,v:1%),right-1r: (p: right,v:1rem),right-3: (p: right, v:3%), right-5: (p: right,v:5%),right-d-5: (p: right,v:5px),right-10: (p: right,v:10%),right-20x: (p: right,v:20px),right-30x: (p: right,v:30px),
     bottom-0: (p: bottom,v:0%),bottom-1: (p: bottom,v:1%),bottom-1r: (p: bottom,v:1rem),bottom-2r: (p: bottom,v:2rem),bottom-3: (p: bottom, v:3%),bottom-3r: (p: bottom, v:3rem), bottom-5: (p: bottom,v:5%),bottom-5x: (p: bottom,v:5px),bottom-6r: (p: bottom,v:6rem),bottom-8r: (p: bottom,v:8rem),bottom-10: (p: bottom,v:10%),bottom-12r: (p: bottom,v:12rem),bottom-28: (p: bottom,v:28%),bottom-60x: (p: bottom,v:60px),bottom-80x: (p: bottom,v:80px),bottom-110x: (p: bottom,v:110px),bottom-50: (p: bottom,v:50%)
 );
