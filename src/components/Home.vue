@@ -16,7 +16,7 @@
         <div class="margin-top-5">
             <img src="../Img/home_b.png" class="width-60">
         </div>
-        <div class="absolute bottom-5 right-5 width-20" @click="goNext">
+        <div class="absolute bottom-5 right-5 width-20" @click="goNext" v-show="goNextStatus">
             <div class="width-100 textcolor-EF4224 relative top-f5r font-size-9">立即行动</div>
             <img src="../Img/loading_next.png" class="width-100 relative" :class="{ 'btn-animate': btnAnimate=== true }">
         </div>
@@ -41,7 +41,8 @@ import Vue from 'vue'
 export default {
   data () {
     return {
-      btnAnimate: false
+      btnAnimate: false,
+      goNextStatus: false
     }
   },
   components: {
@@ -50,6 +51,7 @@ export default {
       const that = this;
       setTimeout(()=>{
           that.btnAnimate = true;
+          that.goNextStatus = true;
       }, 5000)
   },
   created: function () {

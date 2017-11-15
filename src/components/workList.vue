@@ -8,14 +8,14 @@
         <div class="absolute top-1r right-1 width-40 zindex-100 text-align-right">
             <div class="width-100 heightr-2fr relative margin-bottom-2r">
                 <div class="line-heightr-2fr bg-2A2B2C text-align-left textclolor-white padding-left-f5r font-size-6">{{collected}}/{{AllCollect}}</div>
-                <img src="../Img/hert_group.png" class="widthr-3 heightr-2fr absolute right-0 top-0"/>
+                <img src="../Img/hert_group.png" class="heightr-2fr absolute right-0 top-0"/>
             </div>
         </div>
       </div>
       <div class="width-70 margin-left-15 relative bg-show zindex-10">
         <img src="../Img/list_top.png" class="width-100">
       </div>
-      <div class="heightv-65 width-70 margin-left-15" :style="contentPosition">
+      <div class="heightv-65 width-70 margin-left-15 overflow-hide" :style="contentPosition">
         <div class="loadmore-top" v-if="!refresh" v-bind:class="{ transroute: rotate, transnone: !rotate }">↓</div>
         <div class="loadmore-top" v-if="refresh"><div class="spanner span-inner" ></div></div>
         <swiper :options="swiperOption">
@@ -72,7 +72,7 @@ export default {
       pageIndex: 1,
       pageNum: 6,
       allPage: 0,
-      AllCollect: 1000,
+      AllCollect: 1680,
       collected: 0,
       notNextTick: true,
       swiperOption: {

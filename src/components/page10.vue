@@ -21,7 +21,7 @@
         </div>
         <div class="bg-2A2B2C-r relative width-80 margin-left-10 textclolor-white font-size-9  padding-1m">
             <div >只要收集到
-              <span class="textcolor-EF3F24 font-size-12">1,000个</span>
+              <span class="textcolor-EF3F24 font-size-12">1,680个</span>
               <img src="../Img/heart.png" class="width-10" />
             </div>
             <div>

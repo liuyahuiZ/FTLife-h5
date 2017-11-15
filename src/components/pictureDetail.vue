@@ -8,10 +8,10 @@
     <div class="absolute top-10 right-5 width-40 zindex-100 text-align-right" v-show="from!=='takePicture'">
         <div class="width-100 heightr-2fr relative margin-bottom-2r">
             <div class="line-heightr-2fr bg-2A2B2C text-align-left textclolor-white padding-left-1r">{{collect}}/{{AllCollect}}</div>
-            <img src="../Img/hert_group.png" class="widthr-3 heightr-2fr absolute right-0 top-0"/>
+            <img src="../Img/hert_group.png" class="heightr-2fr absolute right-0 top-0"/>
         </div>
         <div class="width-100 ">
-            <img src="../Img/do_hert.png" class="widthr-3 heightr-2fr" @click="doCreat" />
+            <img src="../Img/do_hert.png" class="heightr-2fr" @click="doCreat" />
         </div>
     </div>
     <img src="../Img/heart_icn.png" class="absolute top-1 right-3 display_none" :class="{ 'heart-animate display_block': showHearAnimat }"/>
@@ -53,6 +53,7 @@ import Service from '@/util/service'
 import configs from '@/util/configs'
 import dynamics from 'dynamics.js'
 import Vue from 'vue'
+import wx from 'weixin-js-sdk'
 // let page = document.getElementById('page')
 // console.log(page)
 
@@ -67,7 +68,7 @@ export default {
       shareStatus: false,
       showBg: false,
       from: this.$route.params.from,
-      AllCollect: 1000,
+      AllCollect: 1680,
       showHearAnimat: false,
       showBack: false,
       fontType: sessionStorage.getItem('fontType')
@@ -82,6 +83,14 @@ export default {
     const self = this;
     this.getPicture();
     this.getSelect();
+    wx.config({
+        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '', // 必填，公众号的唯一标识
+        timestamp: '', // 必填，生成签名的时间戳
+        nonceStr: '', // 必填，生成签名的随机串
+        signature: '',// 必填，签名，见附录1
+        jsApiList: [] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
     // console.log('beforeCreate is triggered.')
   },
   methods: {

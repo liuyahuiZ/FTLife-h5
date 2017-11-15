@@ -3,7 +3,7 @@
     <div class="box-flex relative flex-direction-column zindex-10" >
       <div class="width-100 relative">
         <img src="../Img/takeText_top.png" class="width-60">
-        <img src="../Img/takeText_logo.png" class="width-30">
+        <img src="../Img/page1_logo.png" class="width-30">
       </div>
       <div class="bg-ea3f21-r9 relative width-70 margin-left-15 textclolor-white font-size-8 padding-1m margin-top-3r padding-bottom-3r">
           <div class="text-align-center"><img src="../Img/last_title.png" class="width-60 margin-top-3r"></div>
