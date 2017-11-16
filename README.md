@@ -1,10 +1,7 @@
-# wetalk
+# FTLift-h5
 
 ###前端 vue + scss
 > 用vue开发的canvas图片合并
-> 展示地址：www.wetalks.cn
-> github地址：https://github.com/liuyahuiZ/wetalk
-> 主要功能：个人信息展示，博客，相册，图表展示，在线聊天
 
 
 ###后端api koa2
@@ -18,7 +15,7 @@
 
 ``` bash
 # clone code
-git clone git@github.com:liuyahuiZ/wetalk.git
+git clone git@github.com:liuyahuiZ/FTLift-h5.git
 cd wetalk
 
 # install dependencies
