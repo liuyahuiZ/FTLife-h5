@@ -1,7 +1,7 @@
 <template>
     <div >
        <div class="display_none">
-        <audio src="../Img/bgm.mp3" loop="loop" id="audioPlay" ref="bgm" />
+        <audio src="../Img/bgm.mp3" loop="loop" id="audioPlay" ref="bgm" preload="auto" controls />
       </div>
       <div class="absolute right-1r top-2r zindex-900">
         <img src="../Img/music.png" class="widthr-2" v-show="playstatus" @click="pruesmusic"/>
@@ -20,8 +20,10 @@ export default {
   created: function () {
     const self = this;
     setTimeout(()=>{
+      const myVid = self.$refs.bgm;
+      myVid.play();
       self.playmusic()
-    },1000)
+    },3000)
   },
   methods: {
     playmusic: function() {

@@ -164,6 +164,7 @@ export default {
         self.shareStatus = true;
         self.showShare = false;
         self.showBg = true;
+        self.showNoShare = false;
       },
       getPicture: function() {
         const self = this;
