@@ -1,4 +1,4 @@
-# wetalk
+# FTLift-h5
 
 ###前端 vue + scss
 > 用vue开发的canvas图片合并
