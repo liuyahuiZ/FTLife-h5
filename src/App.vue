@@ -11,6 +11,7 @@ import Service from '@/util/service'
 import H from './util/history.js'
 import playMusic from '@/components/playMusic'
 import 'animate.css'
+import wx from 'weixin-js-sdk'
 console.log(H.history)
 export default {
   data () {
@@ -32,8 +33,6 @@ export default {
     console.log('beforeRouteEnter', to, from, next)
   },
   beforeCreate: function () {
-    console.log('调用了beforeCreat钩子函数')
-    this.playmusic()
   },
   beforeMount: function () {
     console.log('调用了beforeMount钩子函数')
@@ -182,7 +181,6 @@ export default {
           });
           wx.ready(()=>{
             console.log('wx.ready');
-            alert('wx.ready');
             const myVid = self.$refs.audio;
             myVid.playmusic();
           });

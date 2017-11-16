@@ -22,7 +22,7 @@
     </div>
     <div class="absolute bottom-0 width-100 zindex-200 text-align-center padding-1m bg-000-r">
         <div class="width-100 textclolor-white margin-bottom-3 font-size-8 ">上传或者立刻拍摄你的“盛世”、“守护”时刻</div>
-        <img src="../Img/action.png" class="width-20 relative" @click="EditImg"/>
+        <img src="../Img/action.png" class="width-20 relative" @click="EditImg" :class="{ 'takepic-animate': line4Animate, 'takepic-deful':!line4Animate }"/>
     </div>
     <img src="../Img/takeText_bg.jpg" class="absolute width-100 top-0 zindex-9"/>
     <div align="center" class="main-screen" v-show="!showImgBox" ref="mainScreen">
@@ -66,6 +66,7 @@ export default {
       showLoading: false,
       isActive: 'shs',
       fontType: sessionStorage.getItem('fontType'),
+      line4Animate: false,
       SHwordArr: {
         'fan': ['守護心常伴左右，健康人生由您擁有','無懼心是一份信任，來自無微不至的守護','讓您無憂開拓健康未來才是真守護','呵護一生才是真守護','守護您，讓人生不留遺憾'],
         'jian': ['守护心常伴左右，健康人生由您拥有','无惧心是一份信任，来自无微不至的守护','让您无忧开拓健康未来才是真守护','呵护一生才是真守护','守护您，让人生不留遗憾']
@@ -84,7 +85,10 @@ export default {
   created: function(){
     let msg = localStorage.getItem("wetalks_user");
     console.log(msg)
-    
+    const that = this;
+    setTimeout(()=>{
+          that.line4Animate = true;
+    }, 1500)
   },
   components: {
       vueLoading
@@ -247,6 +251,96 @@ export default {
     z-index: 120;
     left: 50%;
     transform: translate(-50%,-50%);
+}
+.takepic-animate{
+    animation: anit-in  1.5s infinite;
+}
+.takepic-deful{
+   animation: anit-out  1.5s infinite;
+}
+ .p1-line-animate{
+  position: relative;
+  animation: right-in  1.5s;
+  animation-fill-mode: forwards;
+}
+.p1-pic-animate{
+  position: relative;
+  animation: left-in  1.5s;
+  animation-fill-mode: forwards;
+}
+.left-logo{
+  position: relative;
+  animation: top-in  1.5s;
+  animation-fill-mode: forwards;
+}
+.right-logo{
+  animation: right-in  1.5s;
+  animation-fill-mode: forwards;
+}
+@keyframes anit-in {
+  0% {
+    transform: scale(1,1);
+  }
+  50%{
+    transform: scale(1.2,1.2);
+  }
+  100% {
+    transform: scale(1,1);
+  }
+}
+@keyframes anit-out {
+  0% {
+    transform: scale(0.1,0.1);
+  }
+  50%{
+    transform: scale(0.4,0.4);
+  }
+  100% {
+    transform: scale(1,1);
+  }
+}
+ @keyframes right-in {
+  0% {
+    transform: translateX(30vw);
+    opacity: 0;
+  }
+  50%{
+    transform: translateX(-10vw);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0vw);
+    opacity: 1;
+  }
+}
+
+@keyframes left-in {
+  0% {
+    transform: translateX(-30vw);
+    opacity: 0;
+  }
+  50%{
+    transform: translateX(10vw);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0vw);
+    opacity: 1;
+  }
+}
+@keyframes top-in {
+  0% {
+    transform: translateY(-30vw);
+    opacity: 0;
+  }
+  50%{
+    transform: translateY(10vw);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0vw);
+    opacity: 1;
+  }
 }
 </style>
 

@@ -26,13 +26,13 @@
       <div class="width-70 margin-left-15 margin-top-3r relative">
         <img src="../Img/share_text.png" class="width-100">
       </div>
-      <div class="width-70 margin-left-15 relative margin-top-2 padding-1m bg-ea3f21-r9 textclolor-white padding-bottom-3r">
-        <div class="width-70 margin-top-3r font-size-16"> 分享成功</div>
-        <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-100 margin-top-3r font-size-8" @click="goWorkList">
+      <div class="width-70 margin-left-15 relative margin-top-2 padding-1m bg-ea3f21-r9 textclolor-white padding-bottom-3r" :class="{ 'bg-scale': line1Animate, 'opacity-0':!line1Animate }">
+        <div class="width-70 margin-top-3r font-size-16" :class="{ 'word-scale': line2Animate, 'opacity-0':!line2Animate }"> 分享成功</div>
+        <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-100 margin-top-3r font-size-8" @click="goWorkList" :class="{ 'bottom-line': line3Animate, 'opacity-0':!line3Animate }">
           <span v-show="fontType==='jian'">查看更多「盛世」和「守护」时刻</span>
           <span v-show="fontType==='fan'">查看更多「盛世」和「守護」時刻</span>
         </div>
-        <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-100 margin-top-2 font-size-8" @click="goNext">
+        <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-100 margin-top-2 font-size-8" @click="goNext" :class="{ 'bottom-line': line4Animate, 'opacity-0':!line4Animate }">
           <span v-show="fontType==='jian'">了解真正「盛世」和「守护」</span>
           <span v-show="fontType==='fan'">了解真正「盛世」及「守護」</span>
         </div>
@@ -81,7 +81,11 @@ export default {
       showoption: false,
       fontType: sessionStorage.getItem('fontType'),
       showMyplay: false,
-      showNoShare: false
+      showNoShare: false,
+      line1Animate: false,
+      line2Animate: false,
+      line3Animate: false,
+      line4Animate: false,
     }
   },
   components: {
@@ -165,6 +169,16 @@ export default {
         self.showShare = false;
         self.showBg = true;
         self.showNoShare = false;
+        self.line1Animate = true;
+        setTimeout(()=>{
+              self.line2Animate = true;
+        }, 500)
+        setTimeout(()=>{
+              self.line3Animate = true;
+        }, 1000)
+        setTimeout(()=>{
+              self.line4Animate = true;
+        }, 1200)
       },
       getPicture: function() {
         const self = this;
@@ -277,6 +291,70 @@ export default {
     width: 1.5rem;
     transform: translate(0rem,-2rem);
     opacity: 0;
+  }
+}
+
+.bg-scale{
+  position: relative;
+  animation: bg-in  1.5s;
+  animation-fill-mode: forwards;
+}
+.word-scale{
+  position: relative;
+  animation: anit-in  1.5s;
+  animation-fill-mode: forwards;
+}
+.bottom-line{
+  position: relative;
+  animation: bottom-in  1.5s;
+  animation-fill-mode: forwards;
+}
+@keyframes anit-in {
+  0% {
+    transform: scale(1,1);
+  }
+  50%{
+    transform: scale(1.2,1.2);
+  }
+  100% {
+    transform: scale(1,1);
+  }
+}
+
+@keyframes bg-in {
+  0% {
+    transform: scale(0.5,0.5);
+  }
+  50%{
+    transform: scale(1.2,1.2);
+  }
+  100% {
+    transform: scale(1,1);
+  }
+}
+
+@keyframes top-in {
+  0% {
+    transform: translateY(-30vw);
+    opacity: 0;
+  }
+  50%{
+    transform: translateY(10vw);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0vw);
+    opacity: 1;
+  }
+}
+@keyframes bottom-in {
+  0% {
+    transform: translateY(30vw);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0vw);
+    opacity: 1;
   }
 }
 </style>

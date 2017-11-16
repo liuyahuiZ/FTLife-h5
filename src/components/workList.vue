@@ -29,10 +29,10 @@
       </div>
       <div class="width-100 absolute bottom-1r">
         <div class="text-align-center bg-53575A textclolor-white line-heightr-3 width-70 margin-left-15 margin-top-2 font-size-8" @click="getMyPicture">
-          上传我的盛世和守护
+          上传我的「盛世」和「守护」
         </div>
         <div class="text-align-center bg-53575A textclolor-white line-heightr-3 width-70 margin-left-15 margin-top-2 font-size-8" @click="goNext">
-          了解真正盛世及守护
+          了解真正「盛世」和「守护」
         </div>
       </div>
     </div>
@@ -87,6 +87,10 @@ export default {
             depth: 100,
             modifier: 1,
             slideShadows : true
+        },
+        onSlideChangeEnd: swiper => {
+            console.log('onSlideChangeEnd', swiper.realIndex)
+            this.selectEnd(swiper)
         }
       }
     }
@@ -138,6 +142,18 @@ export default {
     }
   },
   methods: {
+    selectEnd: function(s){
+      console.log('onSlideChangeEnd', s.realIndex)
+      console.log(this.pageIndex, this.allPage, this.pageNum)
+      let theIndex = s.realIndex + 1;
+      let nowNo = parseInt(this.pageIndex, 10) * parseInt(this.pageNum, 10);
+      console.log(theIndex, nowNo, parseInt(this.allPage, 10))
+      if(theIndex === nowNo && theIndex < parseInt(this.allPage, 10)) {
+        this.loadMoreDate().then(function (result) {
+              console.log(result)
+        })
+      }
+    },
     startDrag: function (e) {
       e = e.changedTouches ? e.changedTouches[0] : e
       this.dragging = true
