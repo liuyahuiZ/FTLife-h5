@@ -10,8 +10,9 @@
             <div class="line-heightr-2fr bg-2A2B2C text-align-left textclolor-white padding-left-1r">{{collect}}/{{AllCollect}}</div>
             <img src="../Img/hert_group.png" class="heightr-2fr absolute right-0 top-0"/>
         </div>
-        <div class="width-100 ">
-            <img src="../Img/do_hert.png" class="heightr-2fr" @click="doCreat" />
+        <div class="hearts" @click="doCreat">
+            <img src="../Img/heart_icn.png" class="relative heightr-1fr top-f5r" :class="{ 'img-scale': line6Animate }" @click="doCreat" />
+            <!-- <img src="../Img/do_hert.png" class="heightr-2fr" @click="doCreat" /> -->
         </div>
     </div>
     <img src="../Img/heart_icn.png" class="absolute top-1 right-3 display_none" :class="{ 'heart-animate display_block': showHearAnimat }"/>
@@ -86,6 +87,7 @@ export default {
       line2Animate: false,
       line3Animate: false,
       line4Animate: false,
+      line6Animate: false
     }
   },
   components: {
@@ -98,6 +100,7 @@ export default {
     this.getPicture();
     this.getSelect();
     this.getSign();
+    this.line6Animate= true;
   },
   methods: {
       getSign: function() {
@@ -309,6 +312,21 @@ export default {
   animation: bottom-in  1.5s;
   animation-fill-mode: forwards;
 }
+.img-scale{
+  position: relative;
+  animation: img-in  1.5s infinite;
+}
+@keyframes img-in {
+  0% {
+    transform: scale(1,1);
+  }
+  50%{
+    transform: scale(1.2,1.2);
+  }
+  100% {
+    transform: scale(1,1);
+  }
+}
 @keyframes anit-in {
   0% {
     transform: scale(1,1);
@@ -356,5 +374,15 @@ export default {
     transform: translateY(0vw);
     opacity: 1;
   }
+}
+.hearts{
+  width: 3rem;
+    height: 3rem;
+    text-align: center;
+    line-height:3rem;
+    position: absolute;
+    right: 0;
+    border-radius: 3rem;
+    background: #2A2B2C;
 }
 </style>

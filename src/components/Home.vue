@@ -2,7 +2,10 @@
   <div class="main-home relative bg-show" id="home">
     <img src="../Img/title.jpg" class="display_none">
     <div class="box-flex flex-direction-column" >
-        <div class="padding-all-2rem margin-top-5r" :class="{ 'line-animate': line1Animate }">
+        <div class="width-100 top-1r zindex-9">
+          <img src="../Img/page9_bg.jpg"  class="width-100"/>
+        </div>
+        <div class="padding-all-2rem margin-top-1r" :class="{ 'line-animate': line1Animate }">
            <img src="../Img/home_title.png" class="images-con">
            <img src="../Img/home_title1.png" class="width-60">
         </div>
@@ -24,10 +27,9 @@
         <div class="absolute bottom-0 bg-activity-status width-100 heightr-1 overflow-hide" >
             <img src="../Img/loading_bar.png" class="width-100 heightr-1 loading relative" />
         </div>
-        <div class="absolute top-0 bg-activity-status width-100 heightr-1 overflow-hide" >
+        <div class="absolute top-0 bg-activity-status width-100 heightr-1 overflow-hide zindex-10" >
             <img src="../Img/loading_bar.png" class="width-100 heightr-1 loading relative" />
         </div>
-        
     </div>
   </div>
 </template>

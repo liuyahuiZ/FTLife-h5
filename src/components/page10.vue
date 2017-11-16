@@ -37,7 +37,7 @@
               <span v-show="fontType==='fan'">為三名農村家庭經濟困難、品學兼優的大學生提供四年的學習生活費用</span>
             </div>
             <div :class="{ 'bottom-line': line9Animate, 'opacity-0':!line9Animate }" >
-              <span v-show="fontType==='jian'">「守护」他們实现</span>
+              <span v-show="fontType==='jian'">「守护」他们实现</span>
               <span v-show="fontType==='fan'">「守護」他們實現</span>
             </div>
             <div :class="{ 'bottom-line': line10Animate, 'opacity-0':!line10Animate }">

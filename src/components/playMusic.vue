@@ -3,7 +3,7 @@
        <div class="display_none">
         <audio src="../Img/bgm.mp3" loop="loop" id="audioPlay" ref="bgm" preload="auto" controls />
       </div>
-      <div class="absolute right-1r top-2r zindex-900">
+      <div class="absolute right-6 top-32 zindex-900">
         <img src="../Img/music.png" class="widthr-2" v-show="playstatus" @click="pruesmusic"/>
         <img src="../Img/music-off.png" class="widthr-2" v-show="!playstatus" @click="playmusic"/>
       </div>

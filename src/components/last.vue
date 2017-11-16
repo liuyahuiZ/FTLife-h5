@@ -32,7 +32,7 @@ export default {
   data () {
     return {
       btnAnimate: false,
-      fontType: sessionStorage.getItem('fontType'),
+      fontType: localStorage.getItem('fontType')!==null?localStorage.getItem('fontType') : 'jian',
       line1Animate: false,
       line2Animate: false,
       line3Animate: false,
@@ -61,8 +61,9 @@ export default {
         window.location="https://www.ftlife.com.hk/healthmanager/index.html";
       },
       goTakeText: function() {
+        //盛世
         // this.$router.push({path: '/takeText' })
-        window.location="https://www.ftlife.com.hk/tc/products/life-insurance/savings/regent-series.html";
+        window.location="https://www.ftlife.com.hk";
       }
   }
 }

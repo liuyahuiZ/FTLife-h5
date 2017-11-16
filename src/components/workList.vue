@@ -13,9 +13,13 @@
         </div>
       </div>
       <div class="width-70 margin-left-15 relative bg-show zindex-10">
-        <img src="../Img/list_top.png" class="width-100">
+        <img src="../Img/worklisttitle.png" class="width-100">
+        <div class="width-100 text-align-center font-size-8">
+          <span v-show="fontType==='jian'">为你喜欢的「盛世」及「守护」时刻给心</span>
+          <span v-show="fontType==='fan'">為你喜歡的「盛世」及「守護」時刻給心</span>
+        </div>
       </div>
-      <div class="heightv-65 width-70 margin-left-15" :style="contentPosition">
+      <div class="heightv-65 width-70 margin-left-15 margin-top-1r" :style="contentPosition">
         <div class="loadmore-top display_none" v-if="!refresh" v-bind:class="{ transroute: rotate, transnone: !rotate }">↓</div>
         <div class="loadmore-top display_none" v-if="refresh"><div class="spanner span-inner" ></div></div>
         <swiper :options="swiperOption">
@@ -59,6 +63,7 @@ export default {
       c: { x: 160, y: 160 },
       // record drag start point
       start: { x: 0, y: 0 },
+      fontType: localStorage.getItem('fontType')!==null?localStorage.getItem('fontType') : 'jian',
       rotate: false,
       refresh: false,
       showloading: false,

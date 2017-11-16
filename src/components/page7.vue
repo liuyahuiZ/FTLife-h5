@@ -2,7 +2,7 @@
   <div class="main-home relative bg-show" id="home">
     <div class="main-home" :class="{ 'picture-screen zindex-200': showPicture=== true }">
       <div class="box-flex relative flex-direction-column zindex-10" :class="{ 'p1-line-animate': line1Animate, 'opacity-0':!line1Animate }">
-          <div class="bg-ea3f21-r width-75 margin-top-3r margin-left-25 textclolor-white padding-1m font-size-12" :class="{ 'padding-1m': showPicture=== true }">
+          <div class="bg-83CE3E width-75 margin-top-3r margin-left-25 textclolor-white padding-1m font-size-12" :class="{ 'padding-1m': showPicture=== true }">
               <div :class="{ 'font-size-6': showPicture=== true, 'font-size-8': showPicture=== false , 'p1-line-animate': line2Animate, 'opacity-0':!line2Animate}">
                 <span v-show="fontType==='jian'">我扶着颤颤巍巍学骑单车的你</span>
                 <span v-show="fontType==='fan'">我扶著顫顫巍巍學騎單車的你</span>
@@ -31,7 +31,7 @@
         <img class="width-100" src="../Img/page1_logo.png" />
       </div>
       <div class="absolute width-50 my-shs zindex-10" v-if="showPicture" :class="{'left-logo': line5Animate, 'opacity-0':!line5Animate}">
-        <img class="width-100" src="../Img/page2_my.png" />
+        <img class="width-100" src="../Img/shouhu_logo.png" />
       </div>
       <div class="absolute width-100 heightp-100 top-0 zindex-9 overflow-hide " v-if="showPicture">
         <img class="width-100" src="../Img/page7_bg.jpg" />
