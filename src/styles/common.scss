@@ -257,6 +257,9 @@ $align-self: auto,flex-start,flex-end,center,baseline,stretch;
       -webkit-user-select:none;
       user-select:none; 
 }
+.opacity-0{
+	opacity: 0;
+}
 //animation
 .example-enter {
   opacity: 0.01;

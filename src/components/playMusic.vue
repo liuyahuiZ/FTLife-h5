@@ -19,11 +19,13 @@ export default {
   },
   created: function () {
     const self = this;
-    setTimeout(()=>{
-      const myVid = self.$refs.bgm;
-      myVid.play();
-      self.playmusic()
-    },3000)
+    if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+      WeixinJSBridge.invoke('getNetworkType', {}, function (res) {
+            // 在这里拿到 e.err_msg, 这里面就包含了所有的网络类型
+            // alert(res.err_msg);
+            self.playmusic()
+      });
+    }
   },
   methods: {
     playmusic: function() {

@@ -31,6 +31,18 @@ export default {
   beforeRouteEnter (to, from, next) {
     console.log('beforeRouteEnter', to, from, next)
   },
+  beforeCreate: function () {
+    console.log('调用了beforeCreat钩子函数')
+    this.playmusic()
+  },
+  beforeMount: function () {
+    console.log('调用了beforeMount钩子函数')
+    this.playmusic()
+  },
+  mounted: function () {
+    console.log('调用了mounted钩子函数')
+    this.playmusic()
+  },
   watch: {
     '$route' (to, from) {
       let Toresult = this.inarray(this.historyRoute, to.path)
@@ -60,6 +72,7 @@ export default {
     }
   },
   created: function () {
+    const self = this;
     window.addEventListener('scroll', this.handleScroll)
     let msg = localStorage.getItem("FTL_user");
     if(msg){
@@ -72,11 +85,13 @@ export default {
       localStorage.setItem("FTL_user_id",userid);
       this.register(userid, username);
     }
-    const self = this;
     setTimeout(()=>{
       const myVid = self.$refs.audio;
       myVid.playmusic();
     },2000)
+    this.playmusic()
+    this.getSign();
+    
   },
   methods: {
     inarray: function (arr, item) {
@@ -98,7 +113,7 @@ export default {
     scroll: function () {
       console.log('123')
     },
-    handleScroll () {
+    handleScroll:function () {
       // console.log(window.scrollY)
       if (window.scrollY > 30) {
         this.showBar = true
@@ -106,7 +121,7 @@ export default {
         this.showBar = false
       }
     },
-    randomString (len) {
+    randomString :function(len) {
       len = len || 32;
       let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
       let maxPos = $chars.length;
@@ -128,6 +143,59 @@ export default {
       })
       .catch(error => console.log(error));
     },
+    playmusic: function () {
+      const self = this;
+      const myVid = self.$refs.audio;
+      if (window.WeixinJSBridge) {
+            WeixinJSBridge.invoke('getNetworkType', {}, function (e) {
+                myVid.playmusic();
+            }, false);
+        } else {
+            document.addEventListener("WeixinJSBridgeReady", function () {
+                WeixinJSBridge.invoke('getNetworkType', {}, function (e) {
+                    myVid.playmusic();
+                });
+            }, false);
+        }
+    },
+    getSign: function() {
+        const self = this;
+        let reqbody={
+        "id" : this.$route.params.id
+        }
+        Service.Post('wx/sign',reqbody)
+        .then(data => {
+          console.log(data,data.respBody)
+           wx.config({
+              debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+              appId: 'wxdbe18f838fcee2ba', // 必填，公众号的唯一标识
+              timestamp: data.respBody.timestamp, // 必填，生成签名的时间戳
+              nonceStr: data.respBody.noncestr, // 必填，生成签名的随机串
+              signature: data.respBody.signature,// 必填，签名，见附录1
+              jsApiList: [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone'
+              ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          });
+          wx.ready(()=>{
+            console.log('wx.ready');
+            alert('wx.ready');
+            const myVid = self.$refs.audio;
+            myVid.playmusic();
+          });
+
+          wx.error(function(res){
+
+            console.log('wx err',res);
+
+            //可以更新签名
+          });
+        })
+        .catch(error => console.log(error))
+      },
   },
   components: {
     playMusic
