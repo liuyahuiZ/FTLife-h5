@@ -57,7 +57,7 @@ export default {
     return {
       btnAnimate: false,
       showPicture: false,
-      fontType: sessionStorage.getItem('fontType')
+      fontType: localStorage.getItem('fontType')!==null?localStorage.getItem('fontType') : 'jian'
     }
   },
   components: {

@@ -74,7 +74,7 @@ export default {
   data () {
     return {
       btnAnimate: false,
-      fontType: sessionStorage.getItem('fontType'),
+      fontType: localStorage.getItem('fontType')!==null?localStorage.getItem('fontType') : 'jian',
       line1Animate: false,
       line2Animate: false,
       line3Animate: false,

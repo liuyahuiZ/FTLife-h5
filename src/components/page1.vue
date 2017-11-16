@@ -80,9 +80,9 @@ export default {
       setActive: function(wod) {
         this.isActive= wod;
         if(wod==='fan'){
-          sessionStorage.setItem('fontType','fan')
+          localStorage.setItem('fontType','fan')
         } else{
-          sessionStorage.setItem('fontType','jian')
+          localStorage.setItem('fontType','jian')
         }
       }
   }

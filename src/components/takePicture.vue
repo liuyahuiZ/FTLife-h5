@@ -65,7 +65,7 @@ export default {
       textInfo: '盛世胸懷成就心，富過三代可成真',
       showLoading: false,
       isActive: 'shs',
-      fontType: sessionStorage.getItem('fontType'),
+      fontType: localStorage.getItem('fontType')!==null?localStorage.getItem('fontType') : 'jian',
       line4Animate: false,
       SHwordArr: {
         'fan': ['守護心常伴左右，健康人生由您擁有','無懼心是一份信任，來自無微不至的守護','讓您無憂開拓健康未來才是真守護','呵護一生才是真守護','守護您，讓人生不留遺憾'],
@@ -94,10 +94,10 @@ export default {
       vueLoading
   },
   methods: {
-    EditImg() {
+    EditImg: function() {
         this.$refs.hideenInput.click();
     },
-    inputChange() {
+    inputChange:function() {
       let file = this.$refs.hideenInput.files[0];
       let self = this;
       if (file) {

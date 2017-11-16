@@ -42,7 +42,7 @@ export default {
   data () {
     return {
       btnAnimate: false,
-      fontType: sessionStorage.getItem('fontType')
+      fontType: localStorage.getItem('fontType')!==null?localStorage.getItem('fontType') : 'jian'
     }
   },
   components: {
