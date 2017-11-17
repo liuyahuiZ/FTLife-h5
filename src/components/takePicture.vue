@@ -131,7 +131,7 @@ export default {
       let self = this;
       var data1= new Array();
       var _width = 375;
-      var _height = 667;
+      var _height = 600;
       let images = this.$refs.mainScreen.querySelectorAll('img');
       for(var i=0;i<images.length;i++){
           data1[i]=images[i].src;

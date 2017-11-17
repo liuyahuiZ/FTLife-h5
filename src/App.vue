@@ -89,7 +89,7 @@ export default {
       myVid.playmusic();
     },2000)
     this.playmusic()
-    this.getSign();
+    // this.getSign();
     
   },
   methods: {

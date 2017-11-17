@@ -11,7 +11,7 @@
             <img src="../Img/hert_group.png" class="heightr-2fr absolute right-0 top-0"/>
         </div>
         <div class="hearts" @click="doCreat">
-            <img src="../Img/heart_icn.png" class="relative heightr-1fr top-f5r" :class="{ 'img-scale': line6Animate }" @click="doCreat" />
+            <img src="../Img/heart_icn.png" class="relative heightr-1fr top-f5r" :class="{ 'img-scale': line6Animate }"/>
             <!-- <img src="../Img/do_hert.png" class="heightr-2fr" @click="doCreat" /> -->
         </div>
     </div>
@@ -105,12 +105,14 @@ export default {
   methods: {
       getSign: function() {
         const self = this;
+        let url =  encodeURIComponent(window.location.href.split('#')[0])
         let reqbody={
-        "id" : this.$route.params.id
+        "url" : url
         }
         Service.Post('wx/sign',reqbody)
         .then(data => {
           console.log(data,data.respBody)
+          // alert(JSON.stringify(data.respBody));
            wx.config({
               debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
               appId: 'wxdbe18f838fcee2ba', // 必填，公众号的唯一标识
@@ -127,11 +129,13 @@ export default {
           });
           wx.ready(()=>{
             console.log('wx.ready');
+            // alert('wx.ready')
           });
 
           wx.error(function(res){
 
             console.log('wx err',res);
+            // alert('wx.err'+JSON.stringify(res));
 
             //可以更新签名
           });
@@ -141,6 +145,7 @@ export default {
               imgUrl: 'http://futong.1dospace.com/images/title.jpg', // 分享图标
               success: function () { 
                   // 用户确认分享后执行的回调函数
+                  // alert('123')
                   self.goShare()
               },
               cancel: function () { 
@@ -157,6 +162,7 @@ export default {
               success: function () { 
                   // 用户确认分享后执行的回调函数
                   self.goShare()
+                  // alert('123')
               },
               cancel: function () { 
                   // 用户取消分享后执行的回调函数
