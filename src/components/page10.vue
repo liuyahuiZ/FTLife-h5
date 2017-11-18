@@ -37,12 +37,8 @@
               <span v-show="fontType==='fan'">為三名農村家庭經濟困難、品學兼優的大學生提供四年的學習生活費用</span>
             </div>
             <div :class="{ 'bottom-line': line9Animate, 'opacity-0':!line9Animate }" >
-              <span v-show="fontType==='jian'">「守护」他们实现</span>
-              <span v-show="fontType==='fan'">「守護」他們實現</span>
-            </div>
-            <div :class="{ 'bottom-line': line10Animate, 'opacity-0':!line10Animate }">
-              <span v-show="fontType==='jian'">他们人生的「盛世」时刻</span>
-              <span v-show="fontType==='fan'">他們人生的「盛世」時刻</span>
+              <span v-show="fontType==='jian'">「守护」他们实现人生的「盛世」时刻</span>
+              <span v-show="fontType==='fan'">「守護」他們實現人生的「盛世」時刻</span>
             </div>
             <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-80 margin-left-10 margin-top-2" @click="goTakeText" :class="{ 'bottom-line': line11Animate, 'opacity-0':!line11Animate }">
               <span v-show="fontType==='jian'">立马上传</span>

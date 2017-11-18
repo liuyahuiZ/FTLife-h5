@@ -44,12 +44,19 @@
         <div class="width-70 margin-left-15 bg-show line-heightr-3 textcolor-EF3F24" @click="goWorkList">返回相册</div>
     </div>
     <div class="absolute bottom-0 width-100 zindex-200 text-align-center padding-1m bg-000-r" v-show="showNoShare">
-        <div class="width-70 margin-left-15 bg-show line-heightr-3 textcolor-EF3F24" @click="goNoShare">暂不分享</div>
+        <div class="width-70 margin-left-15 bg-show line-heightr-3 textcolor-EF3F24" @click="goNoShare">
+          <span v-show="fontType==='jian'">暂不分享</span>
+          <span v-show="fontType==='fan'">暫不分享</span>
+        </div>
     </div>
     <div class="absolute bottom-0 width-100 zindex-100 text-align-center padding-1m bg-000-r" v-show="showMyplay">
         <div class="width-70 margin-left-15 bg-show line-heightr-3 textcolor-EF3F24" @click="goHome">我也要玩</div>
     </div>
     <div class="absolute bottom-0 width-100 zindex-200 text-align-center padding-1m bg-000-r" v-show="showoption">
+      <div class="width-100 textclolor-white margin-bottom-3 font-size-8 " v-show="showAnci">
+        <span v-show="fontType==='jian'">按此确认</span>
+        <span v-show="fontType==='fan'">按此確認</span>
+      </div>
         <img src="../Img/action.png" class="width-20 relative" @click="showShareApp"/>
     </div>
   </div>
@@ -87,7 +94,8 @@ export default {
       line2Animate: false,
       line3Animate: false,
       line4Animate: false,
-      line6Animate: false
+      line6Animate: false,
+      showAnci: false
     }
   },
   components: {
@@ -212,6 +220,7 @@ export default {
                 } else {
                     if(self.from && self.from==='takePicture') {
                       self.showoption = true;
+                      self.showAnci = true;
                     } else{
                         self.showBack = true
                         self.showzan = true;
@@ -268,6 +277,7 @@ export default {
         this.showBg = true;
         this.showoption = false;
         this.showNoShare = true;
+        this.showAnci = false;
       }
   }
 }

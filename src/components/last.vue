@@ -6,7 +6,10 @@
         <img src="../Img/page1_logo.png" class="width-30">
       </div>
       <div class="bg-ea3f21-r9 relative width-70 margin-left-15 textclolor-white font-size-8 padding-1m margin-top-3r padding-bottom-3r" :class="{ 'bg-scale': line1Animate, 'opacity-0':!line1Animate }">
-          <div class="text-align-center" :class="{ 'word-scale': line2Animate, 'opacity-0':!line2Animate }"><img src="../Img/last_title.png" class="width-60 margin-top-3r"></div>
+          <div class="text-align-center" :class="{ 'word-scale': line2Animate, 'opacity-0':!line2Animate }">
+            <img src="../Img/last_title.png" class="width-60 margin-top-3r" v-show="fontType==='jian'">
+            <img src="../Img/fin_fanti_slogen.png" class="width-60 margin-top-3r" v-show="fontType==='fan'">
+          </div>
           <div class="text-align-center bg-show textcolor-EF3F24 line-heightr-3 width-80 margin-left-10 margin-top-3r" @click="goTakeText" :class="{ 'bottom-line': line3Animate, 'opacity-0':!line3Animate }">
             了解真正的「盛世」
           </div>

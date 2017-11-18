@@ -17,7 +17,7 @@
             </div>
             <div>
               <span v-show="fontType==='jian'">而成就「盛世」时刻</span>
-              <span v-show="fontType==='fan'">而成就【盛世】 時刻</span>
+              <span v-show="fontType==='fan'">而成就「盛世」時刻</span>
             </div>
             <div>
               <span v-show="fontType==='jian'">往往来自</span>
@@ -27,7 +27,10 @@
               <span v-show="fontType==='jian'">身边爱你的人的</span>
               <span v-show="fontType==='fan'">身邊愛你的人的</span>
             </div>
-            <div><img src="../Img/page5_b.png" class="width-30 margin-top-f5r "/></div>
+            <div>
+              <img src="../Img/page5_b.png" class="width-30 margin-top-f5r " v-show="fontType==='jian'"/>
+              <img src="../Img/shouhu_fanti_text.png" class="width-30 margin-top-f5r " v-show="fontType==='fan'"/>
+            </div>
         </div>
         <div class="margin-top-5-d text-align-right" :class="{ 'p1-line-animate': line3Animate, 'opacity-0':!line3Animate }">
             <img src="../Img/page1_b.png" class="width-80">

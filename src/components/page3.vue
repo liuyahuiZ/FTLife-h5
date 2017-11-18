@@ -21,10 +21,11 @@
         <img class="width-100" src="../Img/pic_top.png" />
       </div>
       <div class="absolute width-40 my-logo zindex-10" v-if="showPicture" :class="{'right-logo': line6Animate, 'opacity-0':!line6Animate}">
-        <img class="width-100" src="../Img/page1_logo.png" />
+        <img class="width-100" src="../Img/takeText_logo.png" />
       </div>
       <div class="absolute width-50 my-shs zindex-10" v-if="showPicture" :class="{'left-logo': line5Animate, 'opacity-0':!line5Animate}">
-        <img class="width-100" src="../Img/page2_my.png" />
+        <img class="width-100" src="../Img/page2_my.png" v-show="fontType==='jian'"/>
+        <img class="width-100" src="../Img/shengshi_fanti_slogen.png" v-show="fontType==='fan'"/>
       </div>
       <div class="absolute width-100 heightp-100 top-0 zindex-9 overflow-hide " v-if="showPicture">
         <img class="width-100" src="../Img/page3_bg.jpg" />

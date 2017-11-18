@@ -20,8 +20,9 @@
         </div>
     </div>
     <div class="absolute width-40 bottom-6r zindex-10" :class="{ 'p1-pic-animate': line1Animate, 'opacity-0':!line1Animate }">
-        <img class="width-100" src="../Img/shouhu_logo.png" />
-      </div>
+        <img class="width-100" src="../Img/shouhu_logo.png" v-show="fontType==='jian'"/>
+        <img class="width-100" src="../Img/shouhu_fanti_slogen.png" v-show="fontType==='fan'"/>
+    </div>
     <div class="absolute bottom-0 width-100 zindex-200 text-align-center padding-1m bg-000-r" @click="goNext">
         <img src="../Img/action_movie.png" class="width-20 " :class="{ 'takepic-animate': line4Animate, 'takepic-deful':!line4Animate }"/>
     </div>

@@ -6,8 +6,9 @@
           <img src="../Img/page9_bg.jpg"  class="width-100"/>
         </div>
         <div class="padding-all-2rem margin-top-1r" :class="{ 'line-animate': line1Animate }">
-           <img src="../Img/home_title.png" class="images-con">
-           <img src="../Img/home_title1.png" class="width-60">
+           <img src="../Img/home_title.png" class="images-con" />
+           <img src="../Img/home_title1.png" class="width-60" v-show="fontType==='fan'"/>
+           <img src="../Img/home_title_jian.png" class="width-60" v-show="fontType==='jian'"/>
         </div>
         <div class="bg-activity-status width-90 textclolor-white padding-1m-2m">
             <div :class="{ 'line-animate': line2Animate, 'opacity-0':!line2Animate }">奉献爱心大行动</div>
@@ -46,6 +47,7 @@ export default {
   data () {
     return {
       btnAnimate: false,
+      fontType: localStorage.getItem('fontType')!==null?localStorage.getItem('fontType') : 'jian',
       goNextStatus: false,
       line1Animate: false,
       line2Animate: false,

@@ -15,19 +15,34 @@
       <div class="bg-ea3f21-r9 relative width-70 margin-left-15 textclolor-white font-size-8 padding-1m ">
           <textarea class="width-100 heightr-9 font-size-12" v-model="textInfo" />
           <img src="../Img/change.png" class="absolute widthr-4 top-9r right-1r" @click="changeWrod()"/>
-          <div class="margin-top-2">1.选择盛世或者守护</div>
-          <div>2.选择或者输入你想要合成的文字</div>
-          <div>3.点击拍照按钮选择你想要合成的照片</div>
+          <div class="margin-top-2">
+            <span v-show="fontType==='jian'">1.选择盛世或者守护</span>
+            <span v-show="fontType==='fan'">1.選擇盛世或者守護</span>
+          </div>
+          <div>
+            <span v-show="fontType==='jian'">2.选择或者输入你想要合成的文字</span>
+            <span v-show="fontType==='fan'">2.選擇或輸入你想要合成的文字</span>
+          </div>
+          <div>
+            <span v-show="fontType==='jian'">3.点击拍照按钮选择你想要合成的照片</span>
+            <span v-show="fontType==='fan'">3.黠擊拍照按鈕輸入你想要合成的照片</span>
+          </div>
       </div>
     </div>
     <div class="absolute bottom-0 width-100 zindex-200 text-align-center padding-1m bg-000-r">
-        <div class="width-100 textclolor-white margin-bottom-3 font-size-8 ">上传或者立刻拍摄你的“盛世”、“守护”时刻</div>
+        <div class="width-100 textclolor-white margin-bottom-3 font-size-8 ">
+          <span v-show="fontType==='jian'">上传或者立刻拍摄你的“盛世”、“守护”时刻</span>
+          <span v-show="fontType==='fan'">上傳或者立刻拍攝你的 “盛世”、“守護”時刻</span>
+        </div>
         <img src="../Img/action.png" class="width-20 relative" @click="EditImg" :class="{ 'takepic-animate': line4Animate, 'takepic-deful':!line4Animate }"/>
     </div>
     <img src="../Img/takeText_bg.jpg" class="absolute width-100 top-0 zindex-9"/>
     <div align="center" class="main-screen" v-show="!showImgBox" ref="mainScreen">
         <img class="photo-img" ref="selectImg" v-bind:src="(selectImgSrc)" @click='EditImg' alt="" />
-        <img src="../Img/pic_hover.png" class="hover-img">
+        <img src="../Img/pic_hover_ss_f.png" class="hover-img" v-if="isActive=== 'shs'&& fontType==='fan'">
+        <img src="../Img/pic_hover_ss_j.png" class="hover-img" v-if="isActive=== 'shs'&& fontType==='jian'">
+        <img src="../Img/pic_hover_sh_f.png" class="hover-img" v-if="isActive=== 'sh'&& fontType==='fan'">
+        <img src="../Img/pic_hover_sh_j.png" class="hover-img" v-if="isActive=== 'sh'&& fontType==='jian'">
         <div class="absolute bottom-28 width-100 zindex-100 text-align-left textclolor-white padding-1m">
           <div class="font-size-12">我的{{textTitle}}</div>
           <div>{{textInfo}}</div>
@@ -95,6 +110,11 @@ export default {
   },
   methods: {
     EditImg: function() {
+        console.log(this.textInfo)
+        if(this.textInfo.length>30){
+          alert('请输入30字以内');
+          return false;
+        }
         this.$refs.hideenInput.click();
     },
     inputChange:function() {
@@ -131,7 +151,7 @@ export default {
       let self = this;
       var data1= new Array();
       var _width = 375;
-      var _height = 600;
+      var _height = 500;
       let images = this.$refs.mainScreen.querySelectorAll('img');
       for(var i=0;i<images.length;i++){
           data1[i]=images[i].src;
@@ -178,14 +198,22 @@ export default {
             // 用渐变填色
             ctx.fillStyle='#fff';
 
-            ctx.fillText(info,20,430);
+            ctx.fillText(info,20,270);
 
             let text = self.textInfo;
             ctx.font="15px Verdana";
             // 用渐变填色
             ctx.fillStyle='#fff';
-
-            ctx.fillText(text,20,460);
+            let i = 16;
+            if(text.length>i){
+              let text1= text.substring(0,i);
+              let text2= text.substring(i,text.length);
+              console.log(text1, text2);
+              ctx.fillText(text1,20,300);
+              ctx.fillText(text2,20,320);
+            } else{
+              ctx.fillText(text,20,300);
+            }
             self.convertCanvasToImage(c);
             // Canvas2Image.saveAsJPEG(c); //保存到电脑
           }
