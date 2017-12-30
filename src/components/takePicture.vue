@@ -193,12 +193,12 @@ export default {
               }
           }else{
             //保存生成作品图片
-            let info = '我的'+self.textTitle;
-            ctx.font="19px Verdana";
-            // 用渐变填色
-            ctx.fillStyle='#fff';
+            // let info = '我的'+self.textTitle;
+            // ctx.font="19px Verdana";
+            // // 用渐变填色
+            // ctx.fillStyle='#fff';
 
-            ctx.fillText(info,20,270);
+            // ctx.fillText(info,20,270);
 
             let text = self.textInfo;
             ctx.font="15px Verdana";
@@ -209,10 +209,10 @@ export default {
               let text1= text.substring(0,i);
               let text2= text.substring(i,text.length);
               console.log(text1, text2);
-              ctx.fillText(text1,20,300);
-              ctx.fillText(text2,20,320);
+              ctx.fillText(text1,20,410);
+              ctx.fillText(text2,20,430);
             } else{
-              ctx.fillText(text,20,300);
+              ctx.fillText(text,20,410);
             }
             self.convertCanvasToImage(c);
             // Canvas2Image.saveAsJPEG(c); //保存到电脑
